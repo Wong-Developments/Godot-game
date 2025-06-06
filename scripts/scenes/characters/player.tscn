@@ -1,6 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://bp7iroykiawtd"]
+[gd_scene load_steps=38 format=3 uid="uid://c7mb04nqxq3aj"]
 
 [ext_resource type="Texture2D" uid="uid://e55f33p2dxry" path="res://assets/character/volkner_by_aveontrainer_denaay8.png" id="1_aj0fn"]
+[ext_resource type="Script" uid="uid://bi2dldgtvrqg" path="res://scripts/gameplay/characters/Player.cs" id="1_dxmph"]
+[ext_resource type="Script" uid="uid://dderraehdnjuw" path="res://scripts/gameplay/characters/PlayerInput.cs" id="1_ymkfk"]
+[ext_resource type="Script" uid="uid://cfqshxc8tx8a6" path="res://scripts/gameplay/characters/CharacterMovement.cs" id="2_jgu7x"]
+[ext_resource type="Script" uid="uid://drcwrekcsm1ot" path="res://scripts/gameplay/characters/CharacterAnimation.cs" id="2_woydv"]
+[ext_resource type="Script" uid="uid://ceaqjhcc8d43i" path="res://scripts/scenes/utilities/StateMachine.cs" id="5_jgu7x"]
+[ext_resource type="Script" uid="uid://wxdf8sl7554e" path="res://scripts/gameplay/characters/states/PlayerRoamState.cs" id="6_dg5vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woryx"]
 size = Vector2(16, 16)
@@ -160,7 +166,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_down",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -171,7 +177,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_left",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -182,7 +188,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_right",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -193,7 +199,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turn_up",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -264,22 +270,31 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateMachine")]
+script = ExtResource("1_dxmph")
+StateMachine = NodePath("StateMachine")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_woryx")
 
 [node name="Input" type="Node" parent="."]
+script = ExtResource("1_ymkfk")
 
-[node name="Movement" type="Node" parent="."]
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("Character", "CharacterInput")]
+script = ExtResource("2_jgu7x")
+Character = NodePath("..")
+CharacterInput = NodePath("../Input")
 
-[node name="idle" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("CharacterInput", "CharacterMovement")]
 texture_filter = 1
 position = Vector2(8, 4)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aj0fn")
-animation = &"idle_left"
+animation = &"turn_up"
+script = ExtResource("2_woydv")
+CharacterInput = NodePath("../Input")
+CharacterMovement = NodePath("../Movement")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(8, 8)
@@ -291,6 +306,11 @@ position = Vector2(8, 8)
 target_position = Vector2(0, 16)
 collide_with_areas = true
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("Customer")]
+script = ExtResource("5_jgu7x")
+Customer = NodePath("..")
 
-[node name="FreeRoam" type="Node" parent="StateMachine"]
+[node name="FreeRoam" type="Node" parent="StateMachine" node_paths=PackedStringArray("PlayerInput", "StateOwner")]
+script = ExtResource("6_dg5vs")
+PlayerInput = NodePath("../../Input")
+StateOwner = NodePath("../..")
