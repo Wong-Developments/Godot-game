@@ -16,6 +16,8 @@ public partial class CharacterMovement : Node
 	[Export] public Vector2 TargetPosition = Vector2.Down;
 	[Export] public bool IsWalking = false;
 
+	[Export] public float WalkSpeed = 4;
+
 	public override void _Ready()
 	{
 		Logger.Info("Loading player movement...");
@@ -49,7 +51,7 @@ public partial class CharacterMovement : Node
 	{
 		if (IsWalking)
 		{
-			Character.Position = Character.Position.MoveToward(TargetPosition, (float)delta * Globals.Instance.GRID_SIZE * 4);
+			Character.Position = Character.Position.MoveToward(TargetPosition, (float)delta * Globals.Instance.GRID_SIZE * WalkSpeed);
 
 			if (Character.Position.DistanceTo(TargetPosition) < 1f)
 			{

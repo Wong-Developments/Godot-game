@@ -285,6 +285,7 @@ script = ExtResource("1_ymkfk")
 script = ExtResource("2_jgu7x")
 Character = NodePath("..")
 CharacterInput = NodePath("../Input")
+WalkSpeed = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("CharacterInput", "CharacterMovement")]
 texture_filter = 1
