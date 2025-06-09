@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5xftef7s22dn"]
 
 [ext_resource type="PackedScene" uid="uid://bjpxvb3ppvlao" path="res://scripts/scenes/levels/smallTown.tscn" id="1_r0wq6"]
-[ext_resource type="PackedScene" uid="uid://bp7iroykiawtd" path="res://scripts/scenes/characters/player.tscn" id="2_0e10o"]
+[ext_resource type="PackedScene" uid="uid://c7mb04nqxq3aj" path="res://scripts/scenes/characters/player.tscn" id="2_0e10o"]
 
 [node name="GameManager" type="Node"]
 

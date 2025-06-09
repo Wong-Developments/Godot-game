@@ -1,3 +1,39 @@
 # Godot 4+ specific ignores
 .godot/
-/android/
+.nomedia
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+export_credentials.cfg
+*.translation
+
+# Mono/.NET-specific ignores
+.mono/
+mono_crash.*.json
+data_*/
+*.csproj
+*.sln
+*.user
+*.suo
+*.pidb
+*.dll
+*.mdb
+*.exe
+*.ide
+*.cache
+
+# Build system
+bin/
+obj/
+Build/
+build/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.orig
+
+# Logs
+*.log
