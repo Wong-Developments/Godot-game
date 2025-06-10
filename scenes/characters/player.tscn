@@ -303,13 +303,6 @@ offset = Vector2(8, 8)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
-[node name="CollisionRayCast" type="RayCast2D" parent="." node_paths=PackedStringArray("CharacterInput")]
-position = Vector2(8, 8)
-target_position = Vector2(0, 16)
-collide_with_areas = true
-script = ExtResource("6_0pgv2")
-CharacterInput = NodePath("../Input")
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("Customer")]
 script = ExtResource("5_jgu7x")
 Customer = NodePath("..")
@@ -318,3 +311,7 @@ Customer = NodePath("..")
 script = ExtResource("6_dg5vs")
 PlayerInput = NodePath("../../Input")
 StateOwner = NodePath("../..")
+
+[node name="RayCast2D" type="RayCast2D" parent="." node_paths=PackedStringArray("CharacterInput")]
+script = ExtResource("6_0pgv2")
+CharacterInput = NodePath("../Input")
