@@ -1,11 +1,12 @@
-[gd_scene load_steps=38 format=3 uid="uid://c7mb04nqxq3aj"]
+[gd_scene load_steps=39 format=3 uid="uid://c7mb04nqxq3aj"]
 
 [ext_resource type="Texture2D" uid="uid://e55f33p2dxry" path="res://assets/character/volkner_by_aveontrainer_denaay8.png" id="1_aj0fn"]
 [ext_resource type="Script" uid="uid://bi2dldgtvrqg" path="res://scripts/gameplay/characters/Player.cs" id="1_dxmph"]
 [ext_resource type="Script" uid="uid://dderraehdnjuw" path="res://scripts/gameplay/characters/PlayerInput.cs" id="1_ymkfk"]
 [ext_resource type="Script" uid="uid://cfqshxc8tx8a6" path="res://scripts/gameplay/characters/CharacterMovement.cs" id="2_jgu7x"]
 [ext_resource type="Script" uid="uid://drcwrekcsm1ot" path="res://scripts/gameplay/characters/CharacterAnimation.cs" id="2_woydv"]
-[ext_resource type="Script" uid="uid://ceaqjhcc8d43i" path="res://scripts/scenes/utilities/StateMachine.cs" id="5_jgu7x"]
+[ext_resource type="Script" uid="uid://ceaqjhcc8d43i" path="res://scenes/utilities/StateMachine.cs" id="5_jgu7x"]
+[ext_resource type="Script" uid="uid://odce4apmoawe" path="res://scripts/gameplay/characters/CharacterCollisionRayCast.cs" id="6_0pgv2"]
 [ext_resource type="Script" uid="uid://wxdf8sl7554e" path="res://scripts/gameplay/characters/states/PlayerRoamState.cs" id="6_dg5vs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_woryx"]
@@ -302,10 +303,12 @@ offset = Vector2(8, 8)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
-[node name="CollisionRayCast" type="RayCast2D" parent="."]
+[node name="CollisionRayCast" type="RayCast2D" parent="." node_paths=PackedStringArray("CharacterInput")]
 position = Vector2(8, 8)
 target_position = Vector2(0, 16)
 collide_with_areas = true
+script = ExtResource("6_0pgv2")
+CharacterInput = NodePath("../Input")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("Customer")]
 script = ExtResource("5_jgu7x")
