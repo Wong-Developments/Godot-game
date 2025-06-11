@@ -14,11 +14,13 @@ _attackButton = NodePath("CombatScene/UI/AttackButton")
 [node name="CombatScene" parent="." instance=ExtResource("1_n0p4f")]
 
 [node name="PlayerSprite" type="Sprite2D" parent="CombatScene"]
+texture_filter = 1
 position = Vector2(232, 337)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_35sma")
 
 [node name="EnemySprite" type="Sprite2D" parent="CombatScene"]
+texture_filter = 1
 position = Vector2(884, 344)
 scale = Vector2(4, 4)
 texture = ExtResource("4_b521f")
