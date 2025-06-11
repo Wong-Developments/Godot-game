@@ -44,3 +44,11 @@ offset_left = 400.0
 offset_top = 20.0
 offset_right = 515.0
 offset_bottom = 43.0
+
+[node name="TextAttack" type="RichTextLabel" parent="CombatScene/UI"]
+offset_left = 536.0
+offset_top = 504.0
+offset_right = 600.0
+offset_bottom = 544.0
+text = "Attack
+"
