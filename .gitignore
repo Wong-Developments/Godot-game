@@ -19,8 +19,10 @@ export_credentials.cfg
 .mono/
 mono_crash.*.json
 data_*/
-*.csproj  # KEEP THESE IF THEY ARE YOUR MAIN PROJECT/SOLUTION FILES!
-*.sln     # KEEP THESE IF THEY ARE YOUR MAIN PROJECT/SOLUTION FILES!
+# IMPORTANT: The main .csproj and .sln files ARE essential and should be TRACKED.
+# Only ignore temporary/backup versions.
+# *.csproj  # KEEP THESE IF THEY ARE YOUR MAIN PROJECT/SOLUTION FILES!
+# *.sln     # KEEP THESE IF THEY ARE YOUR MAIN PROJECT/SOLUTION FILES!
 # UNLESS you are specifically ignoring only generated/temp ones.
 # Generally, the primary .csproj and .sln files ARE tracked.
 #
