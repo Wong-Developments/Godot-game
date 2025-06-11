@@ -8,22 +8,34 @@ export.cfg
 export_presets.cfg
 export_credentials.cfg
 *.translation
+*.zip        # Add this for archive files
+*.7z         # Add this for archive files
+*.rar        # Common archive
+*.dmg        # macOS disk images
+*.exe        # Ensure executables are always ignored
+*.pak        # Common game package format
 
 # Mono/.NET-specific ignores
 .mono/
 mono_crash.*.json
 data_*/
-*.csproj
-*.sln
-*.user
+*.csproj  # KEEP THESE IF THEY ARE YOUR MAIN PROJECT/SOLUTION FILES!
+*.sln     # KEEP THESE IF THEY ARE YOUR MAIN PROJECT/SOLUTION FILES!
+# UNLESS you are specifically ignoring only generated/temp ones.
+# Generally, the primary .csproj and .sln files ARE tracked.
+#
+# Instead, explicitly ignore temp/old ones:
+*.csproj.old
+*.csproj.old.*
+*.sln.user
 *.suo
 *.pidb
-*.dll
+*.dll        # Ensure this is for build output, not for plugin dlls that need tracking
 *.mdb
-*.exe
+# *.exe      # Already added above
 *.ide
 *.cache
-
+*~           # General rule for backup/temp files (e.g., ~libgit_plugin...)
 
 # Build system
 bin/
@@ -34,8 +46,12 @@ build/
 # IDEs and editors
 .vscode/
 .idea/
-.vs/ # Add this line
+.vs/
 *.orig
 
 # Logs
 *.log
+
+# Specific large asset/backup folders if they contain non-project files
+# For example, if assets/Drive is purely for large non-source stuff:
+# assets/Drive/
