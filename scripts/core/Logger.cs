@@ -32,7 +32,7 @@ namespace Game.Core
                     break;
             }
 
-            GD.PrintRich([$"[color={color}]{logMessage}[/color]", .. message]);
+            GD.PrintRich([$"[color={color}]{logMessage}[/color] ", .. message]);
         }
 
         public static void Debug(params object[] message)

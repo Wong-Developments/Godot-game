@@ -24,6 +24,7 @@ data_*/
 *.ide
 *.cache
 
+
 # Build system
 bin/
 obj/
@@ -33,6 +34,7 @@ build/
 # IDEs and editors
 .vscode/
 .idea/
+.vs/ # Add this line
 *.orig
 
 # Logs

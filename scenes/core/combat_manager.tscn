@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://le824y486sqf"]
+
+[ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scenes/core/CombatManager.cs" id="1_mtj8m"]
+[ext_resource type="PackedScene" uid="uid://bky2ja50so08t" path="res://scenes/combat/combatZone.tscn" id="1_n0p4f"]
+[ext_resource type="Texture2D" uid="uid://d1q23k0psl3b1" path="res://assets/Drive/Combat Sprites/LionKnight-RSide-.png" id="3_35sma"]
+[ext_resource type="Texture2D" uid="uid://kygw1oxdyrsc" path="res://assets/Drive/Combat Sprites/purple_giant.png" id="4_b521f"]
+
+[node name="CombatManager" type="Node" node_paths=PackedStringArray("_playerHPLabel", "_enemyHPLabel", "_attackButton")]
+script = ExtResource("1_mtj8m")
+_playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
+_enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
+_attackButton = NodePath("CombatScene/UI/AttackButton")
+
+[node name="CombatScene" parent="." instance=ExtResource("1_n0p4f")]
+
+[node name="PlayerSprite" type="Sprite2D" parent="CombatScene"]
+position = Vector2(232, 337)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_35sma")
+
+[node name="EnemySprite" type="Sprite2D" parent="CombatScene"]
+position = Vector2(884, 344)
+scale = Vector2(4, 4)
+texture = ExtResource("4_b521f")
+
+[node name="UI" type="CanvasLayer" parent="CombatScene"]
+
+[node name="AttackButton" type="Button" parent="CombatScene/UI"]
+offset_left = 465.0
+offset_top = 422.0
+offset_right = 665.0
+offset_bottom = 622.0
+
+[node name="PlayerHealthLabel" type="Label" parent="CombatScene/UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 131.0
+offset_bottom = 43.0
+
+[node name="EnemyHealthLabel" type="Label" parent="CombatScene/UI"]
+offset_left = 400.0
+offset_top = 20.0
+offset_right = 515.0
+offset_bottom = 43.0
