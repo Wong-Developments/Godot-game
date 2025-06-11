@@ -282,10 +282,11 @@ shape = SubResource("RectangleShape2D_woryx")
 [node name="Input" type="Node" parent="."]
 script = ExtResource("1_ymkfk")
 
-[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("Character", "CharacterInput")]
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("Character", "CharacterInput", "CharacterCollisionRayCast")]
 script = ExtResource("2_jgu7x")
 Character = NodePath("..")
 CharacterInput = NodePath("../Input")
+CharacterCollisionRayCast = NodePath("../CollisionRayCast")
 WalkSpeed = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("CharacterInput", "CharacterMovement")]
