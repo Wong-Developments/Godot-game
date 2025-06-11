@@ -11,11 +11,12 @@ public partial class CharacterMovement : Node
 	[ExportCategory("Nodes")]
 	[Export] public Node2D Character;
 	[Export] public CharacterInput CharacterInput;
+	[Export] public CharacterCollisionRayCast CharacterCollisionRayCast;
 
 	[ExportCategory("Movement")]
 	[Export] public Vector2 TargetPosition = Vector2.Down;
 	[Export] public bool IsWalking = false;
-
+	[Export] public bool CollisionDetected = false;
 	[Export] public float WalkSpeed = 4;
 
 	public override void _Ready()
@@ -24,6 +25,8 @@ public partial class CharacterMovement : Node
 
 		CharacterInput.Walk += StartWalking;
 		CharacterInput.Turn += Turn;
+
+		CharacterCollisionRayCast.Collision += (value) => CollisionDetected = value;
 	}
 
 	public override void _Process(double delta)
@@ -36,9 +39,14 @@ public partial class CharacterMovement : Node
 		return IsWalking;
 	}
 
+	public bool IsColliding()
+	{
+		return CollisionDetected;
+	}
+
 	public void StartWalking()
 	{
-		if (!IsMoving())
+		if (!IsMoving() && !IsColliding())
 		{
 			EmitSignal(SignalName.Animation, "walk");
 			TargetPosition = Character.Position + CharacterInput.Direction * Globals.Instance.GRID_SIZE;

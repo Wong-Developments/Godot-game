@@ -6,7 +6,7 @@ using System;
 namespace Game.Gameplay;
 public partial class CharacterCollisionRayCast : RayCast2D
 {
-	[Signal] public delegate void collisionEventHandler(bool collided);
+	[Signal] public delegate void CollisionEventHandler(bool collided);
 
 	[ExportCategory("Collision Vars")]
 	[Export] public CharacterInput CharacterInput;
@@ -16,7 +16,6 @@ public partial class CharacterCollisionRayCast : RayCast2D
 	{
 		Logger.Info("Loading character collision raycast componenet...");
 	}
-
 
 	public override void _Process(double delta)
 	{
@@ -28,6 +27,18 @@ public partial class CharacterCollisionRayCast : RayCast2D
 		if (IsColliding())
 		{
 			Collider = GetCollider();
+			string colliderType = Collider.GetType().Name;
+
+			switch (colliderType)
+			{
+				default:
+					EmitSignal(SignalName.Collision, true);
+					break;
+			}
+		}
+		else
+		{
+			EmitSignal(SignalName.Collision, false);
 		}
 	}
 }
