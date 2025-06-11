@@ -32,7 +32,6 @@ data_*/
 *.sln.user
 *.suo
 *.pidb
-*.dll        # Ensure this is for build output, not for plugin dlls that need tracking
 *.mdb
 # *.exe      # Already added above
 *.ide
