@@ -36,7 +36,8 @@ data_*/
 # *.exe      # Already added above
 *.ide
 *.cache
-*~           # General rule for backup/temp files (e.g., ~libgit_plugin...)
+*~ 
+**/~*          
 
 # Build system
 bin/
