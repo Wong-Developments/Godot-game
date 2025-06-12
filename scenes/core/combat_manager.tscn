@@ -2,28 +2,22 @@
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://bky2ja50so08t" path="res://scenes/combat/combatZone.tscn" id="1_n0p4f"]
-[ext_resource type="Texture2D" uid="uid://d1q23k0psl3b1" path="res://assets/Drive/Combat Sprites/LionKnight-RSide-.png" id="3_35sma"]
-[ext_resource type="Texture2D" uid="uid://kygw1oxdyrsc" path="res://assets/Drive/Combat Sprites/purple_giant.png" id="4_b521f"]
+[ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
+[ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
 
-[node name="CombatManager" type="Node" node_paths=PackedStringArray("_playerHPLabel", "_enemyHPLabel", "_attackButton")]
+[node name="CombatManager" type="Node" node_paths=PackedStringArray("_player", "_enemy", "_playerHPLabel", "_enemyHPLabel", "_attackButton")]
 script = ExtResource("1_mtj8m")
+_player = NodePath("CombatScene/Player")
+_enemy = NodePath("CombatScene/Enemy")
 _playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
 _enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
 _attackButton = NodePath("CombatScene/UI/AttackButton")
 
 [node name="CombatScene" parent="." instance=ExtResource("1_n0p4f")]
 
-[node name="PlayerSprite" type="Sprite2D" parent="CombatScene"]
-texture_filter = 1
-position = Vector2(232, 337)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_35sma")
+[node name="Player" parent="CombatScene" instance=ExtResource("3_b521f")]
 
-[node name="EnemySprite" type="Sprite2D" parent="CombatScene"]
-texture_filter = 1
-position = Vector2(884, 344)
-scale = Vector2(4, 4)
-texture = ExtResource("4_b521f")
+[node name="Enemy" parent="CombatScene" instance=ExtResource("5_tkdkq")]
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
