@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
 [ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
 
-[node name="CombatManager" type="Node" node_paths=PackedStringArray("_player", "_enemy", "_playerHPLabel", "_enemyHPLabel", "_attackButton")]
+[node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemy", "playerHPLabel", "enemyHPLabel", "attackButton")]
 script = ExtResource("1_mtj8m")
-_player = NodePath("CombatScene/Player")
-_enemy = NodePath("CombatScene/Enemy")
-_playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
-_enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
-_attackButton = NodePath("CombatScene/UI/AttackButton")
+player = NodePath("CombatScene/Player")
+enemy = NodePath("CombatScene/Enemy")
+playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
+enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
+attackButton = NodePath("CombatScene/UI/AttackButton")
 
 [node name="CombatScene" parent="." instance=ExtResource("1_n0p4f")]
 
