@@ -4,31 +4,31 @@ using System;
 
 public partial class CombatManager : Node
 {
-    [Export] private Player _player;
-    [Export] private Enemy _enemy;
+    [Export] private Player player;
+    [Export] private Enemy enemy;
 
-    [Export] private Label _playerHPLabel;
-    [Export] private Label _enemyHPLabel;
-    [Export] private Button _attackButton;
+    [Export] private Label playerHPLabel;
+    [Export] private Label enemyHPLabel;
+    [Export] private Button attackButton;
 
-    private bool _playerTurn = true;
+    private bool playerTurn = true;
 
     public override void _Ready()
     {
         Logger.Debug("CombatManager Ready");
-        _attackButton.Pressed += OnAttackPressed;
+        attackButton.Pressed += OnAttackPressed;
         UpdateHPLabels();
     }
 
     private async void OnAttackPressed()
     {
-        if (!_playerTurn) return;
+        if (!playerTurn) return;
 
-        int damage = _player.Attack();
-        _enemy.TakeDamage(damage);
+        int damage = player.Attack();
+        enemy.TakeDamage(damage);
         UpdateHPLabels();
 
-        _playerTurn = false;
+        playerTurn = false;
 
         // 1s pause before the enemy’s turn
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
@@ -38,39 +38,39 @@ public partial class CombatManager : Node
 
     private void EnemyTurn()
     {
-        if (_enemy.Health <= 0)
+        if (enemy.Health <= 0)
         {
             BattleWon();
             return;
         }
 
-        int damage = _enemy.Attack();
-        _player.TakeDamage(damage);
+        int damage = enemy.Attack();
+        player.TakeDamage(damage);
         UpdateHPLabels();
 
-        if (_player.Health <= 0)
+        if (player.Health <= 0)
             BattleLost();
         else
-            _playerTurn = true;
+            playerTurn = true;
     }
 
     private void BattleWon()
     {
         Logger.Info("Enemy defeated!");
-        _attackButton.Disabled = true;
+        attackButton.Disabled = true;
         // TODO: handle victory
     }
 
     private void BattleLost()
     {
         Logger.Info("Player defeated!");
-        _attackButton.Disabled = true;
+        attackButton.Disabled = true;
         // TODO: handle game-over
     }
 
     private void UpdateHPLabels()
     {
-        _playerHPLabel.Text = $"Player HP: {_player.Health}";
-        _enemyHPLabel.Text = $"Enemy HP: {_enemy.Health}";
+        playerHPLabel.Text = $"Player HP: {player.Health}";
+        enemyHPLabel.Text = $"Enemy HP: {enemy.Health}";
     }
 }

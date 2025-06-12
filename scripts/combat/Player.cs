@@ -4,12 +4,12 @@ using System;
 
 public partial class Player : Node2D
 {
-    [Export] public int MaxHealth = 100;
+    [Export] public int maxHealth = 100;
     public int Health { get; private set; }
 
     public override void _Ready()
     {
-        Health = MaxHealth;
+        Health = maxHealth;
     }
 
     public int Attack()
