@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://le824y486sqf"]
 
-[ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scenes/core/CombatManager.cs" id="1_mtj8m"]
+[ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://bky2ja50so08t" path="res://scenes/combat/combatZone.tscn" id="1_n0p4f"]
 [ext_resource type="Texture2D" uid="uid://d1q23k0psl3b1" path="res://assets/Drive/Combat Sprites/LionKnight-RSide-.png" id="3_35sma"]
 [ext_resource type="Texture2D" uid="uid://kygw1oxdyrsc" path="res://assets/Drive/Combat Sprites/purple_giant.png" id="4_b521f"]
