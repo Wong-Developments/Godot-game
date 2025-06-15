@@ -5,7 +5,7 @@ namespace Game.Utilities;
 
 public abstract partial class State : Node
 {
-    [Export] public Node stateOwner;
+    [Export] public Node StateOwner;
 
     public virtual void EnterState()
     {

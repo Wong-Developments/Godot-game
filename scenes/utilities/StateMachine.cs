@@ -6,31 +6,31 @@ namespace Game.Utilities;
 public partial class StateMachine : Node
 {
 	[ExportCategory("State Machine Vars")]
-	[Export] public Node customer;
-	[Export] public State currentState;
+	[Export] public Node Customer;
+	[Export] public State CurrentState;
 	public override void _Ready()
 	{
 		foreach (Node child in GetChildren())
 		{
 			if (child is State state)
 			{
-				state.Owner = customer;
+				state.Owner = Customer;
 				state.SetProcess(false);
 			}
 		}
 	}
 
-	public string GetCurrentState() => currentState.Name.ToString();
+	public string GetCurrentState() => CurrentState.Name.ToString();
 
     public void ChangeState(State newState)
 	{
-		currentState?.ExitState();
-		currentState = newState;
-		currentState?.EnterState();
+		CurrentState?.ExitState();
+		CurrentState = newState;
+		CurrentState?.EnterState();
 
 		foreach (Node child in GetChildren())		
 			if (child is State state)			
-				state.SetProcess(child == currentState);
+				state.SetProcess(child == CurrentState);
 		
 	}
 }
