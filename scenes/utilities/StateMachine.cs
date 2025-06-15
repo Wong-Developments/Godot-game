@@ -20,23 +20,17 @@ public partial class StateMachine : Node
 		}
 	}
 
-	public string GetCurrentState()
-	{
-		return CurrentState.Name.ToString();
-	}
+	public string GetCurrentState() => CurrentState.Name.ToString();
 
-	public void ChangeState(State newState)
+    public void ChangeState(State newState)
 	{
 		CurrentState?.ExitState();
 		CurrentState = newState;
 		CurrentState?.EnterState();
 
-		foreach (Node child in GetChildren())
-		{
-			if (child is State state)
-			{
+		foreach (Node child in GetChildren())		
+			if (child is State state)			
 				state.SetProcess(child == CurrentState);
-			}
-		}
+		
 	}
 }

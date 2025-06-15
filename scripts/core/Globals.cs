@@ -1,23 +1,20 @@
 using Godot;
 using System;
 
+namespace Game.Core;
 
-namespace Game.Core
+public partial class Globals : Node
 {
-	public partial class Globals : Node
+	public static Globals Instance { get; private set; }
+	
+	[ExportCategory("Gameplay")]
+
+	[Export] public int GRID_SIZE = 16;
+
+	public override void _Ready()
 	{
-		public static Globals Instance { get; private set; }
-		
-		[ExportCategory("Gameplay")]
+		Instance = this;
 
-		[Export] public int GRID_SIZE = 16;
-
-		public override void _Ready()
-		{
-			Instance = this;
-
-			Logger.Info(" Loading Globals");
-		}
-
+		Logger.Info(" Loading Globals");
 	}
 }

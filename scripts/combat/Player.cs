@@ -12,7 +12,7 @@ public partial class Player : Node2D
         Health = maxHealth;
     }
 
-    public int Attack()
+    public static int Attack()
     {
         Logger.Debug("Player attacks!");
         return 10;  // damage dealt
