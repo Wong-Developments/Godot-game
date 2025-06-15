@@ -22,9 +22,10 @@ public partial class CombatManager : Node
 
     private async void OnAttackPressed()
     {
-        if (!playerTurn) return;
+        if (!playerTurn) 
+            return;
 
-        int damage = player.Attack();
+        int damage = Player.Attack();
         enemy.TakeDamage(damage);
         UpdateHPLabels();
 
@@ -44,7 +45,7 @@ public partial class CombatManager : Node
             return;
         }
 
-        int damage = enemy.Attack();
+        int damage = Enemy.Attack();
         player.TakeDamage(damage);
         UpdateHPLabels();
 
