@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://le824y486sqf"]
+[gd_scene load_steps=5 format=3 uid="uid://le824y486sqf"]
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
+[ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="4_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
 
 [node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemy", "playerHPLabel", "enemyHPLabel", "attackButton", "cardHand")]
@@ -22,8 +23,10 @@ offset_right = 691.0
 offset_bottom = 384.0
 
 [node name="Player" parent="CombatScene" instance=ExtResource("3_b521f")]
+position = Vector2(-15, -160)
 
 [node name="Enemy" parent="CombatScene" instance=ExtResource("5_tkdkq")]
+position = Vector2(13, -136)
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
@@ -45,3 +48,9 @@ offset_left = 400.0
 offset_top = 20.0
 offset_right = 515.0
 offset_bottom = 43.0
+
+[node name="CardDraft" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(317, 505)
+scale = Vector2(2.22917, 2.22917)
+texture = ExtResource("4_mtj8m")
