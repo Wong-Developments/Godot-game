@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://5xftef7s22dn"]
+[gd_scene load_steps=3 format=3 uid="uid://5xftef7s22dn"]
 
 [ext_resource type="PackedScene" uid="uid://bjpxvb3ppvlao" path="res://scenes/overworld/smallTown.tscn" id="1_r0wq6"]
 [ext_resource type="PackedScene" uid="uid://c7mb04nqxq3aj" path="res://scenes/characters/player.tscn" id="2_0e10o"]
-[ext_resource type="PackedScene" uid="uid://cjvma3ooyes4m" path="res://scenes/characters/enemy.tscn" id="3_lv3y2"]
 
 [node name="GameManager" type="Node"]
 
@@ -35,6 +34,3 @@ texture_filter = 1
 
 [node name="Player" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("2_0e10o")]
 position = Vector2(144, 160)
-
-[node name="Enemy" parent="." instance=ExtResource("3_lv3y2")]
-position = Vector2(384, 168)

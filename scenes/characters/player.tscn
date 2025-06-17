@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://c7mb04nqxq3aj"]
+[gd_scene load_steps=36 format=3 uid="uid://c7mb04nqxq3aj"]
 
 [ext_resource type="Texture2D" uid="uid://e55f33p2dxry" path="res://assets/character/volkner_by_aveontrainer_denaay8.png" id="1_aj0fn"]
 [ext_resource type="Script" uid="uid://bi2dldgtvrqg" path="res://scripts/overworld/player/Player.cs" id="1_dxmph"]
 [ext_resource type="Script" uid="uid://drcwrekcsm1ot" path="res://scripts/overworld/player/CharacterAnimation.cs" id="2_woydv"]
-[ext_resource type="Script" uid="uid://ceaqjhcc8d43i" path="res://scenes/utilities/StateMachine.cs" id="5_jgu7x"]
+[ext_resource type="Script" uid="uid://b1gf2o10tgvxq" path="res://scripts/overworld/player/states/StateMachine.cs" id="4_dyp2m"]
+[ext_resource type="Script" uid="uid://cil2ag8wdli4i" path="res://scripts/overworld/player/states/FreeRoam.cs" id="5_kqtwu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a6ml"]
 atlas = ExtResource("1_aj0fn")
@@ -267,27 +268,33 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dyp2m"]
 size = Vector2(16, 16)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateMachine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine")]
 script = ExtResource("1_dxmph")
-StateMachine = NodePath("StateMachine")
+stateMachine = NodePath("StateMachine")
+speed = 100.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("freeRoam")]
 texture_filter = 1
 position = Vector2(8, 4)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aj0fn")
-animation = &"turn_up"
+animation = &"walk_down"
 script = ExtResource("2_woydv")
+freeRoam = NodePath("../StateMachine/FreeRoam")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(8, 8)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("Customer")]
-script = ExtResource("5_jgu7x")
-Customer = NodePath("..")
-
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_dyp2m")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner")]
+script = ExtResource("4_dyp2m")
+owner = NodePath("..")
+
+[node name="FreeRoam" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine")]
+script = ExtResource("5_kqtwu")
+stateMachine = NodePath("..")

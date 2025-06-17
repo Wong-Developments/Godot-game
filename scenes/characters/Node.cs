@@ -1,10 +1,9 @@
 using Godot;
 using System;
 
-public partial class FreeRoam : Node
+public partial class Node : Godot.Node
 {
-	[Signal] public delegate void AnimationEventHandler(string animationName);
-	public Vector2 direction;
+	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 	}
@@ -13,6 +12,4 @@ public partial class FreeRoam : Node
 	public override void _Process(double delta)
 	{
 	}
-
-
 }

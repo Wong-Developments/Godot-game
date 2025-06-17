@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Overworld.Player.States;
 using Godot;
 using System;
 
@@ -31,17 +32,11 @@ public partial class CharacterAnimation : AnimatedSprite2D
 				else if (freeRoam.direction == Vector2.Left) ECharacterAnimation = ECharacterAnimation.walk_left;
 				else if (freeRoam.direction == Vector2.Right) ECharacterAnimation = ECharacterAnimation.walk_right;
 				break;
-			case "turn":
-				if (freeRoam.direction == Vector2.Up) ECharacterAnimation = ECharacterAnimation.turn_up;
-				else if (freeRoam.direction == Vector2.Down) ECharacterAnimation = ECharacterAnimation.turn_down;
-				else if (freeRoam.direction == Vector2.Left) ECharacterAnimation = ECharacterAnimation.turn_left;
-				else if (freeRoam.direction == Vector2.Right) ECharacterAnimation = ECharacterAnimation.turn_right;
-				break;
 			case "idle":
-				if (freeRoam.direction == Vector2.Up) ECharacterAnimation = ECharacterAnimation.idle_up;
-				else if (freeRoam.direction == Vector2.Down) ECharacterAnimation = ECharacterAnimation.idle_down;
-				else if (freeRoam.direction == Vector2.Left) ECharacterAnimation = ECharacterAnimation.idle_left;
-				else if (freeRoam.direction == Vector2.Right) ECharacterAnimation = ECharacterAnimation.idle_right;
+				if (ECharacterAnimation == ECharacterAnimation.walk_up) ECharacterAnimation = ECharacterAnimation.idle_up;
+				else if (ECharacterAnimation == ECharacterAnimation.walk_down) ECharacterAnimation = ECharacterAnimation.idle_down;
+				else if (ECharacterAnimation == ECharacterAnimation.walk_left) ECharacterAnimation = ECharacterAnimation.idle_left;
+				else if (ECharacterAnimation == ECharacterAnimation.walk_right) ECharacterAnimation = ECharacterAnimation.idle_right;
 				break;
 		}
 
