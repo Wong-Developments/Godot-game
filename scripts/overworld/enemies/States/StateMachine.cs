@@ -1,13 +1,13 @@
 using Godot;
 using System;
 
-namespace Game.Overworld.Player.States;
+namespace Game.Overworld.Enemies.States;
 
 public partial class StateMachine : Node
 {
 	[ExportCategory("State Machine Vars")]
 
-	[Export] public Character owner;
+	[Export] public Enemy owner;
 
 	[Export] public State currentState;
 

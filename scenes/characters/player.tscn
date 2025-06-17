@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://c7mb04nqxq3aj"]
 
 [ext_resource type="Texture2D" uid="uid://e55f33p2dxry" path="res://assets/character/volkner_by_aveontrainer_denaay8.png" id="1_aj0fn"]
-[ext_resource type="Script" uid="uid://bi2dldgtvrqg" path="res://scripts/overworld/player/Player.cs" id="1_dxmph"]
+[ext_resource type="Script" uid="uid://y2fuygtvrpqe" path="res://scripts/overworld/player/Character.cs" id="1_dxmph"]
 [ext_resource type="Script" uid="uid://drcwrekcsm1ot" path="res://scripts/overworld/player/CharacterAnimation.cs" id="2_woydv"]
 [ext_resource type="Script" uid="uid://b1gf2o10tgvxq" path="res://scripts/overworld/player/states/StateMachine.cs" id="4_dyp2m"]
 [ext_resource type="Script" uid="uid://cil2ag8wdli4i" path="res://scripts/overworld/player/states/FreeRoam.cs" id="5_kqtwu"]
@@ -274,6 +274,7 @@ stateMachine = NodePath("StateMachine")
 speed = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("freeRoam")]
+z_index = 1
 texture_filter = 1
 position = Vector2(8, 4)
 scale = Vector2(0.5, 0.5)

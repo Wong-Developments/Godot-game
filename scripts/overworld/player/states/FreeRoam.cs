@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Overworld.Player;
 using Godot;
 using System;
 

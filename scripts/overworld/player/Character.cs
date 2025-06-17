@@ -4,7 +4,7 @@ using System;
 
 namespace Game.Overworld.Player;
 
-public partial class Player : CharacterBody2D
+public partial class Character : CharacterBody2D
 {
 	[Export] public StateMachine stateMachine;
 
@@ -12,6 +12,7 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
+		AddToGroup("player");
 		stateMachine.ChangeState(stateMachine.GetNode<State>("FreeRoam"));
 	}
 
