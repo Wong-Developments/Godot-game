@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://le824y486sqf"]
+[gd_scene load_steps=4 format=3 uid="uid://le824y486sqf"]
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
-[ext_resource type="PackedScene" uid="uid://bky2ja50so08t" path="res://scenes/combat/combatZone.tscn" id="1_n0p4f"]
 [ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
 [ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
 
@@ -13,7 +12,7 @@ playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
 enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
 attackButton = NodePath("CombatScene/UI/AttackButton")
 
-[node name="CombatScene" parent="." instance=ExtResource("1_n0p4f")]
+[node name="CombatScene" type="Node2D" parent="."]
 
 [node name="Player" parent="CombatScene" instance=ExtResource("3_b521f")]
 
