@@ -5,9 +5,9 @@ using System;
 
 namespace Game.Overworld.Enemies.Monster;
 
-public partial class CharacterAnimation : AnimatedSprite2D
+public partial class MonsterAnimation : AnimatedSprite2D
 {
-    [Export] public FreeRoam state;
+	[Export] public FreeRoam state;
 
 	[ExportCategory("Animation Vars")]
 	[Export] ECharacterAnimation ECharacterAnimation = ECharacterAnimation.idle_down;

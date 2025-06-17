@@ -26,13 +26,18 @@ public partial class FreeRoam : State
         }
     }
 
-    public void GetInput(double delta)
+    public void MoveToPlayer(double delta)
     {
         if (player == null) return;
 
         // Calculate direction to player (normalized)
         direction = (player.Position - stateMachine.owner.Position).Normalized();
 
+        
+    }
+
+    public override void PhysicsUpdate(double delta)
+    {
         // Animation control
         if (direction != Vector2.Zero)
         {
@@ -42,11 +47,8 @@ public partial class FreeRoam : State
         {
             EmitSignal(SignalName.Animation, "idle");
         }
-    }
 
-    public override void PhysicsUpdate(double delta)
-    {
-        GetInput(delta);
+        MoveToPlayer(delta);
         
         if (player == null) return;
 

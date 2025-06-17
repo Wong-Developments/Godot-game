@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://mnl0irml476l" path="res://scripts/overworld/enemies/Monster/Monster.cs" id="1_jl15v"]
 [ext_resource type="SpriteFrames" uid="uid://c5aod432pwnee" path="res://resources/animations/monster.tres" id="2_emo4d"]
+[ext_resource type="Script" uid="uid://ht3arujdlaja" path="res://scripts/overworld/enemies/Monster/MonsterAnimation.cs" id="3_emo4d"]
 [ext_resource type="Script" uid="uid://dmoelqr3p7l7q" path="res://scripts/overworld/enemies/States/StateMachine.cs" id="3_qxax2"]
-[ext_resource type="Script" uid="uid://dsivf3e1h10qu" path="res://scripts/overworld/enemies/Monster/AnimationsMonster.cs" id="3_yt2uc"]
 [ext_resource type="Script" uid="uid://boxi6bbglxxfw" path="res://scripts/overworld/enemies/States/FreeRoam.cs" id="4_emo4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fulqv"]
@@ -19,12 +19,14 @@ z_index = 5
 position = Vector2(40, 20)
 shape = SubResource("RectangleShape2D_fulqv")
 
-[node name="MonsterAnimation" type="AnimatedSprite2D" parent="."]
+[node name="MonsterAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state")]
 texture_filter = 1
 position = Vector2(32, 16)
 sprite_frames = ExtResource("2_emo4d")
 animation = &"walk_left"
-script = ExtResource("3_yt2uc")
+script = ExtResource("3_emo4d")
+state = NodePath("../StateMachine/FreeRoam")
+ECharacterAnimation = 2
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner")]
 script = ExtResource("3_qxax2")
