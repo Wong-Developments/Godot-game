@@ -16,9 +16,9 @@ public partial class CombatManager : Node
     // UI container for the hand
     [Export] private Control cardHand; 
 
-    [Export] private PackedScene damageCardScene;
-    [Export] private PackedScene healCardScene;
-    [Export] private PackedScene RaiseDefCardScene;
+    [Export] private PackedScene damageCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/damageCard.tscn");
+    [Export] private PackedScene healCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/healCard.tscn");
+    [Export] private PackedScene raiseDefCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/raiseDefCard.tscn");
 
     public override void _Ready()
     {
@@ -34,7 +34,7 @@ public partial class CombatManager : Node
         ClearHand();
         DrawCard(damageCardScene);
         DrawCard(healCardScene);
-        DrawCard(RaiseDefCardScene);
+        DrawCard(raiseDefCardScene);
         playerTurn = true;
     }
 
