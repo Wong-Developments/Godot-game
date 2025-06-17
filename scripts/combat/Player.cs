@@ -5,15 +5,13 @@ using System;
 public partial class Player : Node2D
 {
     [Export] public int maxHealth = 100;
-    [Export] public float baseDefenseMultiplier = 1.0f; // 1.0 = normal defense
 
     public int Health { get; private set; }
-    public float DefenseMultiplier { get; private set; } 
+    public int Shield { get; private set; } = 0;
 
     public override void _Ready()
     {
         Health = maxHealth;
-        DefenseMultiplier = baseDefenseMultiplier;
     }
 
     public static int Attack()
@@ -22,27 +20,45 @@ public partial class Player : Node2D
         return 10;  // damage dealt
     }
 
-    // Modify defense multiplier (with optional min/max bounds)
-    public void ModifyDefense(float amount, float minMultiplier = 0.5f, float maxMultiplier = 2.0f)
-    {
-        DefenseMultiplier = Mathf.Clamp(DefenseMultiplier + amount, minMultiplier, maxMultiplier);
-        Logger.Info($"Player defense changed by {amount:0.00}, now at {DefenseMultiplier:0.00}x");
-    }
-
 
     public void TakeDamage(int amount)
     {
-        int finalDamage = Mathf.Max((int)(amount / DefenseMultiplier), 1);
-        Health = Mathf.Max(Health - finalDamage, 0);
+        int damageLeft = amount;
 
-        Logger.Info($"Player takes {amount} damage, HP is now {Health}");
-        Logger.Debug($"Base damage: {amount} | Defense: {DefenseMultiplier:0.00}x | Final damage: {finalDamage} | HP: {Health}/{maxHealth}");
+        if (Shield > 0)
+        {
+            int absorbed = Mathf.Min(Shield, damageLeft);
+            Shield -= absorbed;
+            damageLeft -= absorbed;
+
+            Logger.Info($"Shield absorbed {absorbed} damage. Shield remaining: {Shield}");
+        }
+
+        if (damageLeft > 0)
+        {
+            Health = Mathf.Max(Health - damageLeft, 0);
+            Logger.Info($"Player took {damageLeft} damage. HP is now {Health}");
+        }
+
+        Logger.Debug($"Raw: {amount} | After Shield: {damageLeft} | Shield: {Shield} | HP: {Health}/{maxHealth}");
     }
 
     public void Heal(int amount)
     {
         Health = Mathf.Min(Health + amount, maxHealth);
         Logger.Info($"Player healed for {amount} HP, health is now {Health}");
+    }
+
+    public void AddShield(int amount)
+    {
+        Shield += amount;
+        Logger.Info($"Player gains {amount} shield. Total shield: {Shield}");
+    }
+
+    public void ResetShield()
+    {
+        Shield = 0;
+        Logger.Info("Shield reset.");
     }
 }
 

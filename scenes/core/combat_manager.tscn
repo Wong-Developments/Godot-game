@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://le824y486sqf"]
+[gd_scene load_steps=4 format=3 uid="uid://le824y486sqf"]
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
-[ext_resource type="PackedScene" uid="uid://bkboborq2wkjf" path="res://scenes/combat/cards/damageCard.tscn" id="2_b521f"]
 [ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
-[ext_resource type="PackedScene" uid="uid://lq7ukhwhkgci" path="res://scenes/combat/cards/healCard.tscn" id="3_tkdkq"]
-[ext_resource type="PackedScene" uid="uid://dkkj28dmsscjc" path="res://scenes/combat/cards/raiseDefCard.tscn" id="4_yybfy"]
 [ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
 
 [node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemy", "playerHPLabel", "enemyHPLabel", "attackButton", "cardHand")]
@@ -15,9 +12,6 @@ playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
 enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
 attackButton = NodePath("CombatScene/UI/AttackButton")
 cardHand = NodePath("CombatScene/CardHand")
-damageCardScene = ExtResource("2_b521f")
-healCardScene = ExtResource("3_tkdkq")
-RaiseDefCardScene = ExtResource("4_yybfy")
 
 [node name="CombatScene" type="Node2D" parent="."]
 
@@ -38,6 +32,7 @@ offset_left = 465.0
 offset_top = 422.0
 offset_right = 665.0
 offset_bottom = 622.0
+text = "Attack"
 
 [node name="PlayerHealthLabel" type="Label" parent="CombatScene/UI"]
 offset_left = 20.0
@@ -50,11 +45,3 @@ offset_left = 400.0
 offset_top = 20.0
 offset_right = 515.0
 offset_bottom = 43.0
-
-[node name="TextAttack" type="RichTextLabel" parent="CombatScene/UI"]
-offset_left = 536.0
-offset_top = 504.0
-offset_right = 600.0
-offset_bottom = 544.0
-text = "Attack
-"

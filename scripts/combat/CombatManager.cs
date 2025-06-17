@@ -18,7 +18,7 @@ public partial class CombatManager : Node
 
     [Export] private PackedScene damageCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/damageCard.tscn");
     [Export] private PackedScene healCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/healCard.tscn");
-    [Export] private PackedScene raiseDefCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/raiseDefCard.tscn");
+    [Export] private PackedScene SheildCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/sheildCard.tscn");
 
     public override void _Ready()
     {
@@ -34,7 +34,7 @@ public partial class CombatManager : Node
         ClearHand();
         DrawCard(damageCardScene);
         DrawCard(healCardScene);
-        DrawCard(raiseDefCardScene);
+        DrawCard(SheildCardScene);
         playerTurn = true;
     }
 
@@ -132,7 +132,7 @@ public partial class CombatManager : Node
 
     private void UpdateHPLabels()
     {
-        playerHPLabel.Text = $"Player HP: {player.Health}";
+        playerHPLabel.Text = $"Player HP: {player.Health} | Shield: {player.Shield}";
         enemyHPLabel.Text = $"Enemy HP: {enemy.Health}";
     }
 }
