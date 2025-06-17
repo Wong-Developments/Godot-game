@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://lq7ukhwhkgci"]
+
+[ext_resource type="Script" uid="uid://k063piu41a87" path="res://scripts/combat/cards/HealCard.cs" id="1_ux7nf"]
+
+[node name="HealCard" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_ux7nf")

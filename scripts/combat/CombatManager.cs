@@ -13,11 +13,29 @@ public partial class CombatManager : Node
 
     private bool playerTurn = true;
 
+    // UI container for the hand
+    [Export] private Control cardHand; 
+
+    [Export] private PackedScene damageCardScene;
+    [Export] private PackedScene healCardScene;
+    [Export] private PackedScene RaiseDefCardScene;
+
     public override void _Ready()
     {
         Logger.Debug("CombatManager Ready");
         attackButton.Pressed += OnAttackPressed;
         UpdateHPLabels();
+        StartPlayerTurn();
+    }
+
+    private void StartPlayerTurn()
+    {
+        Logger.Debug("Player turn begins: drawing cards");
+        ClearHand();
+        DrawCard(damageCardScene);
+        DrawCard(healCardScene);
+        DrawCard(RaiseDefCardScene);
+        playerTurn = true;
     }
 
     private async void OnAttackPressed()
@@ -55,10 +73,52 @@ public partial class CombatManager : Node
             playerTurn = true;
     }
 
+    private void DrawCard(PackedScene cardScene)
+    {
+        var card = cardScene.Instantiate<Card>();
+        card.SetTextLabel();
+
+        card.Pressed += () =>
+        {
+            Logger.Debug($"Card played: {card.CardName}");
+            card.Play(player, enemy);
+            UpdateHPLabels();
+            DiscardCard(card);
+            CheckTurnEnd();
+        };
+
+        cardHand.AddChild(card);
+    }
+
+    private void DiscardCard(Card card)
+    {
+        cardHand.RemoveChild(card);
+        card.QueueFree();
+    }
+
+    private void ClearHand()
+    {
+        foreach (var child in cardHand.GetChildren())
+        {
+            child.QueueFree();
+        }
+    }
+
+    private void CheckTurnEnd()
+    {
+        if (cardHand.GetChildCount() == 0)
+        {
+            Logger.Debug("Player has used all cards");
+            playerTurn = false;
+            EnemyTurn();
+        }
+    }
+
     private void BattleWon()
     {
         Logger.Info("Enemy defeated!");
         attackButton.Disabled = true;
+        ClearHand();
         // TODO: handle victory
     }
 
@@ -66,6 +126,7 @@ public partial class CombatManager : Node
     {
         Logger.Info("Player defeated!");
         attackButton.Disabled = true;
+        ClearHand();
         // TODO: handle game-over
     }
 

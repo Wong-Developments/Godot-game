@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkboborq2wkjf"]
+
+[ext_resource type="Script" uid="uid://c1vul38t6swax" path="res://scripts/combat/cards/DamageCard.cs" id="1_3088r"]
+
+[node name="DamageCard" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_3088r")
