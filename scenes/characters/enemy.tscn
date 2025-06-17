@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://cjvma3ooyes4m"]
+[gd_scene load_steps=32 format=3 uid="uid://cjvma3ooyes4m"]
 
 [ext_resource type="Texture2D" uid="uid://e55f33p2dxry" path="res://assets/character/volkner_by_aveontrainer_denaay8.png" id="1_7jb55"]
-[ext_resource type="Script" uid="uid://e5kqb76qv4a7" path="res://scripts/gameplay/characters/EnemyMovement.cs" id="1_fulqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fulqv"]
 size = Vector2(16, 16)
@@ -271,9 +270,6 @@ animations = [{
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_fulqv")
 
-[node name="Movement" type="Node" parent="."]
-script = ExtResource("1_fulqv")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 4)
 scale = Vector2(0.5, 0.5)
@@ -283,5 +279,3 @@ animation = &"walk_up"
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="FreeRoam" type="Node" parent="StateMachine"]
-
-[node name="CollisionRayCast" type="RayCast2D" parent="."]

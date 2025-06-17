@@ -2,7 +2,7 @@ using Game.Utilities;
 using Godot;
 using System;
 
-namespace Game.Gameplay;
+namespace Game.Overworld.Player;
 
 public partial class Player : CharacterBody2D
 {

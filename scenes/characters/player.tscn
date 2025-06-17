@@ -1,16 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://c7mb04nqxq3aj"]
+[gd_scene load_steps=35 format=3 uid="uid://c7mb04nqxq3aj"]
 
 [ext_resource type="Texture2D" uid="uid://e55f33p2dxry" path="res://assets/character/volkner_by_aveontrainer_denaay8.png" id="1_aj0fn"]
-[ext_resource type="Script" uid="uid://bi2dldgtvrqg" path="res://scripts/gameplay/characters/Player.cs" id="1_dxmph"]
-[ext_resource type="Script" uid="uid://dderraehdnjuw" path="res://scripts/gameplay/characters/PlayerInput.cs" id="1_ymkfk"]
-[ext_resource type="Script" uid="uid://cfqshxc8tx8a6" path="res://scripts/gameplay/characters/CharacterMovement.cs" id="2_jgu7x"]
-[ext_resource type="Script" uid="uid://drcwrekcsm1ot" path="res://scripts/gameplay/characters/CharacterAnimation.cs" id="2_woydv"]
+[ext_resource type="Script" uid="uid://bi2dldgtvrqg" path="res://scripts/overworld/player/Player.cs" id="1_dxmph"]
+[ext_resource type="Script" uid="uid://drcwrekcsm1ot" path="res://scripts/overworld/player/CharacterAnimation.cs" id="2_woydv"]
 [ext_resource type="Script" uid="uid://ceaqjhcc8d43i" path="res://scenes/utilities/StateMachine.cs" id="5_jgu7x"]
-[ext_resource type="Script" uid="uid://odce4apmoawe" path="res://scripts/gameplay/characters/CharacterCollisionRayCast.cs" id="6_0pgv2"]
-[ext_resource type="Script" uid="uid://wxdf8sl7554e" path="res://scripts/gameplay/characters/states/PlayerRoamState.cs" id="6_dg5vs"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_woryx"]
-size = Vector2(16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a6ml"]
 atlas = ExtResource("1_aj0fn")
@@ -271,32 +264,20 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyp2m"]
+size = Vector2(16, 16)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateMachine")]
 script = ExtResource("1_dxmph")
 StateMachine = NodePath("StateMachine")
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(8, 8)
-shape = SubResource("RectangleShape2D_woryx")
-
-[node name="Input" type="Node" parent="."]
-script = ExtResource("1_ymkfk")
-
-[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("Character", "CharacterInput")]
-script = ExtResource("2_jgu7x")
-Character = NodePath("..")
-CharacterInput = NodePath("../Input")
-WalkSpeed = 5.0
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("CharacterInput", "CharacterMovement")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(8, 4)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aj0fn")
 animation = &"turn_up"
 script = ExtResource("2_woydv")
-CharacterInput = NodePath("../Input")
-CharacterMovement = NodePath("../Movement")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(8, 8)
@@ -307,13 +288,6 @@ position_smoothing_enabled = true
 script = ExtResource("5_jgu7x")
 Customer = NodePath("..")
 
-[node name="FreeRoam" type="Node" parent="StateMachine" node_paths=PackedStringArray("PlayerInput", "StateOwner")]
-script = ExtResource("6_dg5vs")
-PlayerInput = NodePath("../../Input")
-StateOwner = NodePath("../..")
-
-[node name="CollisionRayCast" type="RayCast2D" parent="." node_paths=PackedStringArray("CharacterInput")]
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
-target_position = Vector2(0, 16)
-script = ExtResource("6_0pgv2")
-CharacterInput = NodePath("../Input")
+shape = SubResource("RectangleShape2D_dyp2m")
