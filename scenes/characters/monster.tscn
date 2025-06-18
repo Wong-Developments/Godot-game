@@ -16,14 +16,14 @@ stateMachine = NodePath("StateMachine")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 z_index = 5
-position = Vector2(40, 20)
+position = Vector2(32, 20)
 shape = SubResource("RectangleShape2D_fulqv")
 
 [node name="MonsterAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state")]
 texture_filter = 1
 position = Vector2(32, 16)
 sprite_frames = ExtResource("2_emo4d")
-animation = &"walk_left"
+animation = &"idle_up"
 script = ExtResource("3_emo4d")
 state = NodePath("../StateMachine/FreeRoam")
 ECharacterAnimation = 2
