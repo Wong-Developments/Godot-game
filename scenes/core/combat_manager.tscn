@@ -17,40 +17,93 @@ cardHand = NodePath("CombatScene/CardHand")
 [node name="CombatScene" type="Node2D" parent="."]
 
 [node name="CardHand" type="HBoxContainer" parent="CombatScene"]
-offset_left = 439.0
-offset_top = 230.0
-offset_right = 691.0
-offset_bottom = 384.0
+offset_left = 675.0
+offset_top = 446.0
+offset_right = 927.0
+offset_bottom = 600.0
 
 [node name="Player" parent="CombatScene" instance=ExtResource("3_b521f")]
-position = Vector2(-15, -160)
+z_index = 1
+position = Vector2(-163, -203)
+scale = Vector2(2, 2)
 
 [node name="Enemy" parent="CombatScene" instance=ExtResource("5_tkdkq")]
-position = Vector2(13, -136)
+position = Vector2(300, -58)
+scale = Vector2(0.8, 0.8)
+
+[node name="Enemy2" parent="CombatScene" instance=ExtResource("5_tkdkq")]
+position = Vector2(26, -63)
+scale = Vector2(0.8, 0.8)
+
+[node name="Enemy3" parent="CombatScene" instance=ExtResource("5_tkdkq")]
+position = Vector2(-240, -59)
+scale = Vector2(0.8, 0.8)
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
 [node name="AttackButton" type="Button" parent="CombatScene/UI"]
-offset_left = 465.0
-offset_top = 422.0
-offset_right = 665.0
-offset_bottom = 622.0
+offset_left = 1306.0
+offset_top = 444.0
+offset_right = 1506.0
+offset_bottom = 644.0
 text = "Attack"
 
 [node name="PlayerHealthLabel" type="Label" parent="CombatScene/UI"]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 131.0
-offset_bottom = 43.0
+offset_left = 55.0
+offset_top = 25.0
+offset_right = 166.0
+offset_bottom = 48.0
 
 [node name="EnemyHealthLabel" type="Label" parent="CombatScene/UI"]
-offset_left = 400.0
-offset_top = 20.0
-offset_right = 515.0
-offset_bottom = 43.0
+offset_left = 677.0
+offset_top = 56.0
+offset_right = 792.0
+offset_bottom = 79.0
 
 [node name="CardDraft" type="Sprite2D" parent="."]
+z_index = 1
 texture_filter = 1
-position = Vector2(317, 505)
-scale = Vector2(2.22917, 2.22917)
+position = Vector2(583, 559)
+rotation = -0.359538
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_mtj8m")
+
+[node name="CardDraft2" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(666, 522)
+rotation = -0.120428
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_mtj8m")
+
+[node name="CardDraft3" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(765, 499)
+rotation = -0.139626
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_mtj8m")
+
+[node name="CardDraft4" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(964, 525)
+rotation = 0.120428
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_mtj8m")
+
+[node name="CardDraft6" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(1070, 546)
+rotation = 0.120428
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_mtj8m")
+
+[node name="CardDraft5" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(859, 496)
+rotation = 0.120428
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("4_mtj8m")
