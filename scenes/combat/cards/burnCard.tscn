@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://fphr6l2akbob"]
+
+[ext_resource type="Script" uid="uid://tnko4vjyakoq" path="res://scripts/combat/cards/BurnCard.cs" id="1_4d7ud"]
+[ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="1_4tn2u"]
+
+[node name="BurnCard" type="Button"]
+icon = ExtResource("1_4tn2u")
+icon_alignment = 1
+script = ExtResource("1_4d7ud")

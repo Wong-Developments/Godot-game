@@ -1,18 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://le824y486sqf"]
+[gd_scene load_steps=6 format=3 uid="uid://le824y486sqf"]
+[gd_scene load_steps=6 format=3 uid="uid://le824y486sqf"]
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
+[ext_resource type="Script" uid="uid://dgyfcrhfogh0p" path="res://scripts/combat/CardDeck.cs" id="4_35sma"]
 [ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="4_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
 
-[node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemy", "playerHPLabel", "enemyHPLabel", "attackButton", "cardHand")]
+[node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemy", "playerHPLabel", "enemyHPLabel", "attackButton", "cardHand", "cardDeck")]
 script = ExtResource("1_mtj8m")
 player = NodePath("CombatScene/Player")
 enemy = NodePath("CombatScene/Enemy")
 playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
 enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
 attackButton = NodePath("CombatScene/UI/AttackButton")
-cardHand = NodePath("CombatScene/CardHand")
+cardHand = NodePath("CombatScene/UI/CardHand")
+cardDeck = NodePath("CombatScene/CardDeck")
 
 [node name="CombatScene" type="Node2D" parent="."]
 
@@ -42,6 +45,39 @@ scale = Vector2(0.8, 0.8)
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
+[node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.355
+anchor_right = 0.381
+anchor_bottom = 0.355
+offset_left = 0.0879822
+offset_top = -0.0400085
+offset_right = 0.0879822
+offset_bottom = -0.0400085
+
+[node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.355
+anchor_right = 0.381
+anchor_bottom = 0.355
+offset_left = 0.0879822
+offset_top = -0.0400085
+offset_right = 0.0879822
+offset_bottom = -0.0400085
+
+[node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.355
+anchor_right = 0.381
+anchor_bottom = 0.355
+offset_left = 0.0879822
+offset_top = -0.0400085
+offset_right = 0.0879822
+offset_bottom = -0.0400085
+
 [node name="AttackButton" type="Button" parent="CombatScene/UI"]
 offset_left = 731.0
 offset_top = 601.0
@@ -61,7 +97,7 @@ offset_top = 56.0
 offset_right = 792.0
 offset_bottom = 79.0
 
-[node name="CardDraft" type="Sprite2D" parent="."]
+[node name="CardDraft" type="Sprite2D" parent="CombatScene/UI"]
 z_index = 1
 texture_filter = 1
 position = Vector2(584, 570)
@@ -101,9 +137,19 @@ rotation = 0.120428
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("4_mtj8m")
 
-[node name="CardDraft5" type="Sprite2D" parent="."]
+[node name="CardDraft5" type="Sprite2D" parent="CombatScene/UI"]
 z_index = 1
+[node name="CardDraft" type="Sprite2D" parent="CombatScene/UI"]
 texture_filter = 1
 position = Vector2(861, 509)
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("4_mtj8m")
+
+[node name="CardDeck" type="Node" parent="CombatScene"]
+script = ExtResource("4_35sma")
+
+[node name="CardDeck" type="Node" parent="CombatScene"]
+script = ExtResource("4_35sma")
+
+[node name="CardDeck" type="Node" parent="CombatScene"]
+script = ExtResource("4_35sma")

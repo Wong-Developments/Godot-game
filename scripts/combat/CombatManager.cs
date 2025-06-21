@@ -1,6 +1,7 @@
 using Game.Scripts.Core;
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class CombatManager : Node
 {
@@ -20,30 +21,56 @@ public partial class CombatManager : Node
     [Export] private PackedScene healCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/healCard.tscn");
     [Export] private PackedScene sheildCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/sheildCard.tscn");
 
+    [Export] private PackedScene burnCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/burnCard.tscn");
+    [Export] private PackedScene buffCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/buffCard.tscn");
+
+
+    [Export] private CardDeck cardDeck;
+    private const int CardsPerTurn = 3;
+
     public override void _Ready()
     {
         Logger.Debug("CombatManager Ready");
         attackButton.Pressed += OnAttackPressed;
         UpdateHPLabels();
+
+        var allCards = new List<PackedScene> {
+            damageCardScene,
+            healCardScene,
+            sheildCardScene,
+            burnCardScene,
+            buffCardScene
+        };
+
+        cardDeck.InitDeck(allCards);
         StartPlayerTurn();
+
     }
 
     private void StartPlayerTurn()
     {
         Logger.Debug("Player turn begins: drawing cards");
+        player.ProcessEffects(); // ✅ Apply burn, buffs, etc.
         ClearHand();
-        DrawCard(damageCardScene);
-        DrawCard(healCardScene);
-        DrawCard(sheildCardScene);
+
+        for (int i = 0; i < CardsPerTurn; i++)
+        {
+            var cardScene = cardDeck.Draw();
+            if (cardScene != null)
+                DrawCard(cardScene);
+        }
+
         playerTurn = true;
     }
+
 
     private async void OnAttackPressed()
     {
         if (!playerTurn) 
             return;
 
-        enemy.TakeDamage(Player.Attack());
+        int damage = player.Attack();
+        enemy.TakeDamage(damage);
         UpdateHPLabels();
 
         playerTurn = false;
@@ -56,13 +83,15 @@ public partial class CombatManager : Node
 
     private void EnemyTurn()
     {
+        enemy.ProcessEffects(); // ✅ Enemy effects tick before they attack
         if (enemy.Health <= 0)
         {
             BattleWon();
             return;
         }
 
-        player.TakeDamage(Enemy.Attack());
+        int damage = enemy.Attack();
+        player.TakeDamage(damage);
         UpdateHPLabels();
 
         if (player.Health <= 0)
@@ -81,14 +110,16 @@ public partial class CombatManager : Node
             Logger.Debug($"Card played: {card.CardName}");
             card.Play(player, enemy);
             UpdateHPLabels();
-            DiscardCard(card);
+            cardDeck.Discard(cardScene);
+            DiscardCardVisual(card); 
             CheckTurnEnd();
         };
 
         cardHand.AddChild(card);
     }
 
-    private void DiscardCard(Card card)
+
+    private void DiscardCardVisual(Card card)
     {
         cardHand.RemoveChild(card);
         card.QueueFree();
@@ -115,6 +146,7 @@ public partial class CombatManager : Node
         Logger.Info("Enemy defeated!");
         attackButton.Disabled = true;
         ClearHand();
+        cardDeck.Reset();
         // TODO: handle victory
     }
 
@@ -123,6 +155,7 @@ public partial class CombatManager : Node
         Logger.Info("Player defeated!");
         attackButton.Disabled = true;
         ClearHand();
+        cardDeck.Reset();
         // TODO: handle game-over
     }
 

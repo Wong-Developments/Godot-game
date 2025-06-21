@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkboborq2wkjf"]
+[gd_scene load_steps=3 format=3 uid="uid://bkboborq2wkjf"]
 
 [ext_resource type="Script" uid="uid://c1vul38t6swax" path="res://scripts/combat/cards/DamageCard.cs" id="1_3088r"]
+[ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="1_s531y"]
 
 [node name="DamageCard" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
+icon = ExtResource("1_s531y")
+icon_alignment = 1
 script = ExtResource("1_3088r")
