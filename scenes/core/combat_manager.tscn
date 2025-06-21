@@ -1,20 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://le824y486sqf"]
+[gd_scene load_steps=7 format=3 uid="uid://le824y486sqf"]
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
-[ext_resource type="Script" uid="uid://dgyfcrhfogh0p" path="res://scripts/combat/CardDeck.cs" id="4_35sma"]
+[ext_resource type="Script" uid="uid://ime4ecl7srgk" path="res://scripts/combat/HandUIManager.cs" id="4_b521f"]
 [ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="4_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
+[ext_resource type="Script" uid="uid://dj4t7aqei31lb" path="res://scripts/combat/DeckManager.cs" id="6_b521f"]
 
-[node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemy", "playerHPLabel", "enemyHPLabel", "attackButton", "cardHand", "cardDeck")]
+[node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemy", "playerHPLabel", "enemyHPLabel", "endTurnButton", "handUIManager", "deckManager")]
 script = ExtResource("1_mtj8m")
 player = NodePath("CombatScene/Player")
 enemy = NodePath("CombatScene/Enemy")
 playerHPLabel = NodePath("CombatScene/UI/PlayerHealthLabel")
 enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
-attackButton = NodePath("CombatScene/UI/AttackButton")
-cardHand = NodePath("CombatScene/UI/CardHand")
-cardDeck = NodePath("CombatScene/CardDeck")
+endTurnButton = NodePath("CombatScene/UI/EndTurnButton")
+handUIManager = NodePath("CombatScene/UI/HandUIManager")
+deckManager = NodePath("CombatScene/DeckManager")
 
 [node name="CombatScene" type="Node2D" parent="."]
 
@@ -29,18 +30,22 @@ scale = Vector2(0.8, 0.8)
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
-[node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
-offset_left = 819.37
-offset_top = 431.0
-offset_right = 819.37
-offset_bottom = 431.0
+[node name="HandUIManager" type="Node" parent="CombatScene/UI" node_paths=PackedStringArray("handContainer")]
+script = ExtResource("4_b521f")
+handContainer = NodePath("../CardHand")
 
-[node name="AttackButton" type="Button" parent="CombatScene/UI"]
-offset_left = 378.0
-offset_top = 102.0
-offset_right = 501.0
-offset_bottom = 219.0
-text = "Attack"
+[node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.6
+anchor_right = 0.6
+anchor_bottom = 0.6
+
+[node name="EndTurnButton" type="Button" parent="CombatScene/UI"]
+offset_left = 441.0
+offset_top = 413.0
+offset_right = 564.0
+offset_bottom = 530.0
 
 [node name="PlayerHealthLabel" type="Label" parent="CombatScene/UI"]
 offset_left = 55.0
@@ -70,5 +75,5 @@ position = Vector2(861, 509)
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("4_mtj8m")
 
-[node name="CardDeck" type="Node" parent="CombatScene"]
-script = ExtResource("4_35sma")
+[node name="DeckManager" type="Node" parent="CombatScene"]
+script = ExtResource("6_b521f")

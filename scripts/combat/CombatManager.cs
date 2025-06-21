@@ -6,21 +6,19 @@ using System.Collections.Generic;
 
 public partial class CombatManager : Node
 {
+    private bool playerTurn = true;
+
     [Export] private Player player;
     [Export] private Enemy enemy;
 
     [Export] private Label playerHPLabel;
     [Export] private Label enemyHPLabel;
-    [Export] private Button attackButton;
+    [Export] private Button endTurnButton;
 
-    private bool playerTurn = true;
-
-    [Export] private Control cardHand;
-
-    [Export] private CardDeck cardDeck;
+    [Export] private HandUIManager handUIManager;
+    [Export] private DeckManager deckManager;
 
     [Export] private int handDrawSize = 3;
-    [Export] private int maxHandSize = 6; // for draw effects
 
     [Export] private PackedScene damageCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/damageCard.tscn");
     [Export] private PackedScene healCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/healCard.tscn");
@@ -29,9 +27,12 @@ public partial class CombatManager : Node
     [Export] private PackedScene burnCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/burnCard.tscn");
     [Export] private PackedScene buffCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/buffCard.tscn");
 
+    private int turnCount = 0;
+
     public override void _Ready()
     {
-        attackButton.Pressed += OnEndTurnPressed;
+        endTurnButton.Text = "End Turn";
+        endTurnButton.Pressed += OnEndTurnPressed;
         UpdateHPLabels();
 
         var allCards = new List<PackedScene> {
@@ -42,7 +43,7 @@ public partial class CombatManager : Node
             buffCardScene
         };
 
-        cardDeck.InitDeck(allCards);
+        deckManager.InitDeck(allCards);
         StartPlayerTurn();
 
     }
@@ -52,16 +53,13 @@ public partial class CombatManager : Node
         Logger.Debug($"Player's turn begins, drawing {handDrawSize} cards");
 
         player.ProcessEffects(); // Apply effect (burn, buffs, etc)
-        ClearHand(); // Saftey check for any leftover cards
+        handUIManager.ClearHand(); // Saftey check for any leftover cards
 
-        for (int i = 0; i < handDrawSize; i++) // Draw handsize
+        for (int i = 0; i < handDrawSize; i++)
         {
-            if (cardHand.GetChildCount() < maxHandSize) // check if hand is not full
-            {
-                var cardScene = cardDeck.Draw(); // pull from draw pile
-                if (cardScene != null)
-                    AddCardToHand(cardScene); // instantiates and adds to hand 
-            }
+            var cardScene = deckManager.Draw();
+            if (cardScene != null)
+                AddCardToHand(cardScene);
         }
 
         playerTurn = true;
@@ -73,9 +71,20 @@ public partial class CombatManager : Node
         if (!playerTurn) 
             return;
 
-        playerTurn = false;
+        UpdateTurnCount();
 
-        ClearHand(); // Discard all cards in hand
+        playerTurn = false;
+        
+
+        foreach (var node in handUIManager.GetCards())
+        {
+            if (node is Card card)
+            {
+                deckManager.Discard(card.SourceScene); // track original PackedScene
+            }
+        }
+
+        handUIManager.ClearHand(); // Discard all cards in hand (UI)
 
         // 1s pause before the enemy’s turn
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
@@ -86,6 +95,7 @@ public partial class CombatManager : Node
     private async void StartEnemyTurn()
     {
         enemy.ProcessEffects(); // Enemy effects tick before they attack
+
         if (enemy.Health <= 0)
         {
             BattleWon();
@@ -110,6 +120,7 @@ public partial class CombatManager : Node
     private void AddCardToHand(PackedScene cardScene)
     {
         var card = cardScene.Instantiate<Card>();
+        card.SourceScene = cardScene; // track source
         card.SetTextLabel();
 
         card.Pressed += () =>
@@ -117,43 +128,28 @@ public partial class CombatManager : Node
             Logger.Debug($"Card played: {card.CardName}");
             card.Play(player, enemy);
             UpdateHPLabels();
-            cardDeck.Discard(cardScene);
-            DiscardCardVisual(card); 
+            deckManager.Discard(cardScene);
+            handUIManager.RemoveCard(card); 
         };
 
-        cardHand.AddChild(card);
-    }
-
-
-    private void DiscardCardVisual(Card card)
-    {
-        cardHand.RemoveChild(card);
-        card.QueueFree();
-    }
-
-    private void ClearHand()
-    {
-        foreach (var child in cardHand.GetChildren())
-        {
-            child.QueueFree();
-        }
+        handUIManager.AddCard(card);
     }
 
     private void BattleWon()
     {
         Logger.Info("Enemy defeated!");
-        attackButton.Disabled = true;
-        ClearHand();
-        cardDeck.Reset();
+        endTurnButton.Disabled = true;
+        handUIManager.ClearHand();
+        deckManager.Reset();
         // TODO: handle victory
     }
 
     private void BattleLost()
     {
         Logger.Info("Player defeated!");
-        attackButton.Disabled = true;
-        ClearHand();
-        cardDeck.Reset();
+        endTurnButton.Disabled = true;
+        handUIManager.ClearHand();
+        deckManager.Reset();
         // TODO: handle game-over
     }
 
@@ -161,5 +157,12 @@ public partial class CombatManager : Node
     {
         playerHPLabel.Text = $"Player HP: {player.Health} | Shield: {player.Shield}";
         enemyHPLabel.Text = $"Enemy HP: {enemy.Health}";
+    }
+
+    private void UpdateTurnCount()
+    {
+        turnCount++;
+        endTurnButton.Text = $"End Turn \n Turn: {turnCount}";
+        Logger.Debug($"Turn {turnCount} started.");
     }
 }

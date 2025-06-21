@@ -3,7 +3,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class CardDeck : Node
+public partial class DeckManager : Node
 {
     private List<PackedScene> allCardTypes = new();
     private Queue<PackedScene> deck = new();
@@ -35,24 +35,38 @@ public partial class CardDeck : Node
 
     public PackedScene Draw()
     {
+        Logger.Debug($"Drawing card from deck. Current deck size: {deck.Count}, discard pile size: {discardPile.Count}");
         if (deck.Count == 0)
         {
-            Logger.Debug("Deck is empty. Reshuffling discard pile...");
-            ReshuffleDiscardPile();
+            if (discardPile.Count > 0)
+            {
+                Logger.Debug("Deck is empty. Reshuffling discard pile...");
+                ReshuffleDiscardPile();
+            }
+            else
+            {
+                Logger.Warning("No cards left in deck or discard pile.");
+                return null;
+            }
         }
 
-        return deck.Count > 0 ? deck.Dequeue() : null;
+        return deck.Dequeue();
     }
+
+
 
     public void Discard(PackedScene card)
     {
+
         discardPile.Add(card);
+        Logger.Debug($"Card discarded. Current discard pile size: {discardPile.Count}");
     }
 
     private void ReshuffleDiscardPile()
     {
         var shuffled = new List<PackedScene>(discardPile);
         discardPile.Clear();
+        Logger.Debug($"Reshuffling {shuffled.Count} cards from discard pile back into deck. discardPile cleared");
 
         // Fisher-Yates shuffle
         for (int i = shuffled.Count - 1; i > 0; i--)
@@ -64,13 +78,13 @@ public partial class CardDeck : Node
         foreach (var card in shuffled)
             deck.Enqueue(card);
 
-        discardPile.Clear();
     }
 
     public void Reset()
     {
         deck.Clear();
         discardPile.Clear();
-        allCardTypes.Clear();
+        //allCardTypes.Clear();
+        BuildAndShuffleDeck(3);
     }
 }
