@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Scripts.Core;
 using Godot;
 using System;
 

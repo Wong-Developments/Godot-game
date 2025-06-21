@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Scripts.Core;
 using Godot;
 using System;
 
@@ -43,8 +43,7 @@ public partial class CombatManager : Node
         if (!playerTurn) 
             return;
 
-        int damage = Player.Attack();
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(Player.Attack());
         UpdateHPLabels();
 
         playerTurn = false;
@@ -63,8 +62,7 @@ public partial class CombatManager : Node
             return;
         }
 
-        int damage = Enemy.Attack();
-        player.TakeDamage(damage);
+        player.TakeDamage(Enemy.Attack());
         UpdateHPLabels();
 
         if (player.Health <= 0)
@@ -98,10 +96,8 @@ public partial class CombatManager : Node
 
     private void ClearHand()
     {
-        foreach (var child in cardHand.GetChildren())
-        {
-            child.QueueFree();
-        }
+        foreach (var child in cardHand.GetChildren())        
+            child.QueueFree();        
     }
 
     private void CheckTurnEnd()

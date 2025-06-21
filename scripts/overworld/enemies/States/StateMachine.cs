@@ -22,7 +22,6 @@ public partial class StateMachine : Node
 		foreach (Node child in GetChildren())
 			if (child is State state)
 				state.SetProcess(child == currentState);
-
 	}
 
 	public void PhysicsUpdate(double delta)

@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Scripts.Core;
 using Game.Overworld.Player.States;
 using Godot;
 using System;
@@ -45,7 +45,5 @@ public partial class CharacterAnimation : AnimatedSprite2D
 			Logger.Info($"Playing animation {ECharacterAnimation.ToString()}");
 			Play(ECharacterAnimation.ToString());
 		}
-
 	}
-
 }

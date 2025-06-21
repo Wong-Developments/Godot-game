@@ -1,7 +1,8 @@
+using Game.Scripts.Core;
 using Godot;
 using System;
 
-namespace Game.Core;
+namespace Game.Scripts.Core;
 
 public partial class Globals : Node
 {
@@ -14,7 +15,6 @@ public partial class Globals : Node
 	public override void _Ready()
 	{
 		Instance = this;
-
-		Logger.Info(" Loading Globals");
+        Logger.Info("Loading Globals");
 	}
 }

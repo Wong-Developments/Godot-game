@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Core;
+namespace Game.Scripts.Core;
 
 public static class Module
 {

@@ -292,9 +292,10 @@ position_smoothing_enabled = true
 position = Vector2(8, 12)
 shape = SubResource("RectangleShape2D_dyp2m")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner", "currentState")]
 script = ExtResource("4_dyp2m")
 owner = NodePath("..")
+currentState = NodePath("FreeRoam")
 
 [node name="FreeRoam" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine")]
 script = ExtResource("5_kqtwu")

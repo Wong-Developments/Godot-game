@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Scripts.Core;
 using Game.Overworld.Player;
 using Godot;
 
@@ -16,60 +16,42 @@ public partial class FreeRoam : State
     public override void _Ready()
     {
         var players = GetTree().GetNodesInGroup("player");
-        if (players.Count > 0)
-        {
+        if (players.Count > 0)        
             player = players[0] as CharacterBody2D;
-        }
-        else
-        {
+        else        
             GD.PrintErr("No player found in 'player' group");
-        }
     }
 
     public void MoveToPlayer(double delta)
     {
-        if (player == null) return;
+        if (player == null) 
+            return;
 
         // Calculate direction to player (normalized)
-        direction = (player.Position - stateMachine.owner.Position).Normalized();
-
-        
+        direction = (player.Position - stateMachine.owner.Position).Normalized();        
     }
 
     public override void PhysicsUpdate(double delta)
     {
         // Animation control
-        if (direction != Vector2.Zero)
-        {
-            EmitSignal(SignalName.Animation, "walk");
-        }
-        else
-        {
-            EmitSignal(SignalName.Animation, "idle");
-        }
+        if (direction != Vector2.Zero)        
+            EmitSignal(SignalName.Animation, "walk");        
+        else        
+            EmitSignal(SignalName.Animation, "idle");        
 
         MoveToPlayer(delta);
         
-        if (player == null) return;
+        if (player == null) 
+            return;
 
-        float speed = (float)stateMachine.owner.speed;
+        float speed = stateMachine.owner.speed;
         float deltaf = (float)delta;
 
         // Smooth movement using acceleration/deceleration
-        if (direction != Vector2.Zero)
-        {
-            stateMachine.owner.Velocity = stateMachine.owner.Velocity.Lerp(
-                direction * speed, 
-                acceleration * deltaf
-            );
-        }
-        else
-        {
-            stateMachine.owner.Velocity = stateMachine.owner.Velocity.Lerp(
-                Vector2.Zero, 
-                deceleration * deltaf
-            );
-        }
+        if (direction != Vector2.Zero)        
+            stateMachine.owner.Velocity = stateMachine.owner.Velocity.Lerp(direction * speed, acceleration * deltaf);        
+        else        
+            stateMachine.owner.Velocity = stateMachine.owner.Velocity.Lerp(Vector2.Zero, deceleration * deltaf);
 
         stateMachine.owner.MoveAndSlide();
     }

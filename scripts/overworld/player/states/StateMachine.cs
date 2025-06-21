@@ -1,3 +1,4 @@
+using Game.Scripts.Core;
 using Godot;
 using System;
 
@@ -11,7 +12,13 @@ public partial class StateMachine : Node
 
 	[Export] public State currentState;
 
-	public string GetCurrentState() => currentState.Name.ToString();
+    public override void _Ready()
+    {
+        if (currentState is null)
+            Logger.Error("Assigned currentState is not of type State.");
+    }
+
+    public string GetCurrentState() => currentState?.Name?.ToString();
 
 	public void ChangeState(State newState)
 	{
@@ -22,11 +29,10 @@ public partial class StateMachine : Node
 		foreach (Node child in GetChildren())
 			if (child is State state)
 				state.SetProcess(child == currentState);
-
 	}
 
 	public void PhysicsUpdate(double delta)
 	{
-		currentState.PhysicsUpdate(delta);
+		currentState?.PhysicsUpdate(delta);
 	}
 }

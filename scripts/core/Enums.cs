@@ -1,13 +1,10 @@
-namespace Game.Core;
+namespace Game.Scripts.Core;
 
 public enum LogLevel
 {
     DEBUG,
-
     INFO,
-
     WARNING,
-
     ERROR
 }
 

@@ -1,46 +1,53 @@
+using Game.Scripts.Utils;
 using Godot;
 using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
-namespace Game.Core;
+namespace Game.Scripts.Core;
 
 public static class Logger
 {
-
-    public static void Log(LogLevel level, params object[] message)
+    private static void LogMessage(LogLevel level, params object[] message)
     {
-        var dateTime = DateTime.Now;
-        string timeStamp = $"[{dateTime:yyyy-MM-dd HH-mm-ss}]";
-        var callingMethod = new System.Diagnostics.StackTrace().GetFrame(2).GetMethod();
-        string logMessage = $"{timeStamp} [{level}] [{callingMethod.DeclaringType.Name}] [{callingMethod.Name}]";
-        string color = "CYAN";
+        var stackTrace = new StackTrace(true);
+        var frame = stackTrace.GetFrames()?.FirstOrDefault(f => f.GetMethod()?.DeclaringType?.Name != nameof(Logger));
 
-        switch (level)
+        if (frame != null)
         {
-            case LogLevel.DEBUG:
-                color = "WHITE";
-                break;
-            case LogLevel.INFO:
-                color = "CYAN";
-                break;
-            case LogLevel.WARNING:
-                color = "YELLOW";
-                break;
-            case LogLevel.ERROR:
-                color = "RED";
-                break;
-            default:
-                break;
-        }
+            string file = Path.GetFileName(frame.GetFileName() ?? "N/A");
+            int line = frame.GetFileLineNumber();
+            var method = frame.GetMethod();
+            string lvlColor = level switch
+            {
+                LogLevel.DEBUG => "WHITE",
+                LogLevel.INFO => "CYAN",
+                LogLevel.WARNING => "YELLOW",
+                LogLevel.ERROR => "RED",
+                _ => "GRAY",
+            };
 
-        GD.PrintRich([$"[color={color}]{logMessage}[/color] ", .. message]);
+            var timeStampHeader = $"{DateTime.Now:HH:mm:ss.fff}".Color("GREEN").Header();
+            var levelHeader = $"{level}".Color(lvlColor).Header();
+            var fileHeader = $"{file}:{line}".Color("YELLOW").Header();
+            var callHeader = $"{method.DeclaringType.Name}.{method.Name}".Color("PURPLE").Header();
+
+            string logHeader = $"{timeStampHeader} {fileHeader} {callHeader} {levelHeader}";
+
+            //$"[{DateTime.Now:HH:mm:ss}] [{level}] [{file}:{line}] [{method.DeclaringType.Name}.{method.Name}]";
+
+            GD.PrintRich($"{logHeader} {string.Join(" ", message.Select(m => m.ToString().Color(lvlColor)))}");
+        }
+        else        
+            GD.PrintRich([$"[color=RED]Frame Error: unable to capture logging context[/color] ", .. message]);        
     }
 
-    public static void Debug(params object[] message) => Log(LogLevel.DEBUG, message);    
-
-    public static void Info(params object[] message) => Log(LogLevel.INFO, message);    
-
-    public static void Warning(params object[] message) => Log(LogLevel.WARNING, message);    
-    
-    public static void Error(params object[] message) => Log(LogLevel.ERROR, message);
-    
+    public static void Debug(params object[] message) => LogMessage(LogLevel.DEBUG, message);
+    public static void Info(params object[] message) => LogMessage(LogLevel.INFO, message);
+    public static void Warning(params object[] message) => LogMessage(LogLevel.WARNING, message);
+    public static void Error(params object[] message) => LogMessage(LogLevel.ERROR, message);
+    public static void Log(LogLevel level, params object[] message) => LogMessage(level, message);
 }

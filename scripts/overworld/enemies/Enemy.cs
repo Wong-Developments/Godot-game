@@ -8,6 +8,4 @@ public abstract partial class Enemy : CharacterBody2D
 {
 	[Export] public float speed;
 	[Export] public StateMachine stateMachine;
-
-	
 }

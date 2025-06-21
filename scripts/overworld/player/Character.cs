@@ -9,7 +9,6 @@ public partial class Character : CharacterBody2D
 	[Export] public StateMachine stateMachine;
 
 	[Export] public float speed;
-
 	public override void _Ready()
 	{
 		AddToGroup("player");

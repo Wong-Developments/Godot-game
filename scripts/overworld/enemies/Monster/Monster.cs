@@ -3,6 +3,7 @@ using Godot;
 using System;
 
 namespace Game.Overworld.Enemies.Monster;
+
 public partial class Monster : Enemy
 {
 	public override void _Ready()
