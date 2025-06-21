@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Scripts.Core;
 using Godot;
 using System;
 
@@ -12,7 +12,7 @@ public partial class BurnEffect : StatusEffect
 
     protected override void OnApply()
     {
-        Logger.Debug($"{target.Name} is burned for {Duration} turns!");
+        Logger.Info($"{target.Name} is burned for {Duration} turns!");
     }
 
     protected override void OnTick()
@@ -24,6 +24,6 @@ public partial class BurnEffect : StatusEffect
 
     protected override void OnExpire()
     {
-        Logger.Debug($"{target.Name}'s burn wore off.");
+        Logger.Info($"{target.Name}'s burn wore off.");
     }
 }

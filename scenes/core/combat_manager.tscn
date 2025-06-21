@@ -1,5 +1,4 @@
 [gd_scene load_steps=6 format=3 uid="uid://le824y486sqf"]
-[gd_scene load_steps=6 format=3 uid="uid://le824y486sqf"]
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
 [ext_resource type="PackedScene" uid="uid://ddvclakokritu" path="res://scenes/combat/player.tscn" id="3_b521f"]
@@ -19,70 +18,29 @@ cardDeck = NodePath("CombatScene/CardDeck")
 
 [node name="CombatScene" type="Node2D" parent="."]
 
-[node name="CardHand" type="HBoxContainer" parent="CombatScene"]
-z_index = 3
-offset_left = 675.0
-offset_top = 446.0
-offset_right = 927.0
-offset_bottom = 600.0
-
 [node name="Player" parent="CombatScene" instance=ExtResource("3_b521f")]
 z_index = 1
-position = Vector2(-159, -168)
+position = Vector2(19, 250)
 scale = Vector2(2, 2)
 
 [node name="Enemy" parent="CombatScene" instance=ExtResource("5_tkdkq")]
-position = Vector2(300, -58)
-scale = Vector2(0.8, 0.8)
-
-[node name="Enemy2" parent="CombatScene" instance=ExtResource("5_tkdkq")]
-position = Vector2(34, -71)
-scale = Vector2(0.8, 0.8)
-
-[node name="Enemy3" parent="CombatScene" instance=ExtResource("5_tkdkq")]
-position = Vector2(-233, -58)
+position = Vector2(799, 93)
 scale = Vector2(0.8, 0.8)
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
 [node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
 anchors_preset = -1
-anchor_left = 0.381
-anchor_top = 0.355
-anchor_right = 0.381
-anchor_bottom = 0.355
-offset_left = 0.0879822
-offset_top = -0.0400085
-offset_right = 0.0879822
-offset_bottom = -0.0400085
-
-[node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
-anchors_preset = -1
-anchor_left = 0.381
-anchor_top = 0.355
-anchor_right = 0.381
-anchor_bottom = 0.355
-offset_left = 0.0879822
-offset_top = -0.0400085
-offset_right = 0.0879822
-offset_bottom = -0.0400085
-
-[node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
-anchors_preset = -1
-anchor_left = 0.381
-anchor_top = 0.355
-anchor_right = 0.381
-anchor_bottom = 0.355
-offset_left = 0.0879822
-offset_top = -0.0400085
-offset_right = 0.0879822
-offset_bottom = -0.0400085
+offset_left = 819.37
+offset_top = 431.0
+offset_right = 819.37
+offset_bottom = 431.0
 
 [node name="AttackButton" type="Button" parent="CombatScene/UI"]
-offset_left = 731.0
-offset_top = 601.0
-offset_right = 931.0
-offset_bottom = 801.0
+offset_left = 378.0
+offset_top = 102.0
+offset_right = 501.0
+offset_bottom = 219.0
 text = "Attack"
 
 [node name="PlayerHealthLabel" type="Label" parent="CombatScene/UI"]
@@ -98,6 +56,7 @@ offset_right = 792.0
 offset_bottom = 79.0
 
 [node name="CardDraft" type="Sprite2D" parent="CombatScene/UI"]
+visible = false
 z_index = 1
 texture_filter = 1
 position = Vector2(584, 570)
@@ -105,51 +64,12 @@ rotation = -0.359538
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("4_mtj8m")
 
-[node name="CardDraft2" type="Sprite2D" parent="."]
-z_index = 1
-texture_filter = 1
-position = Vector2(668, 534)
-rotation = -0.120428
-scale = Vector2(1.7, 1.7)
-texture = ExtResource("4_mtj8m")
-
-[node name="CardDraft3" type="Sprite2D" parent="."]
-z_index = 1
-texture_filter = 1
-position = Vector2(751, 513)
-rotation = -0.139626
-scale = Vector2(1.7, 1.7)
-texture = ExtResource("4_mtj8m")
-
-[node name="CardDraft4" type="Sprite2D" parent="."]
-z_index = 1
-texture_filter = 1
-position = Vector2(964, 525)
-rotation = 0.120428
-scale = Vector2(1.7, 1.7)
-texture = ExtResource("4_mtj8m")
-
-[node name="CardDraft6" type="Sprite2D" parent="."]
-z_index = 1
-texture_filter = 1
-position = Vector2(1070, 546)
-rotation = 0.120428
-scale = Vector2(1.7, 1.7)
-texture = ExtResource("4_mtj8m")
-
-[node name="CardDraft5" type="Sprite2D" parent="CombatScene/UI"]
-z_index = 1
-[node name="CardDraft" type="Sprite2D" parent="CombatScene/UI"]
+[node name="CardDraft2" type="Sprite2D" parent="CombatScene/UI"]
+visible = false
 texture_filter = 1
 position = Vector2(861, 509)
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("4_mtj8m")
-
-[node name="CardDeck" type="Node" parent="CombatScene"]
-script = ExtResource("4_35sma")
-
-[node name="CardDeck" type="Node" parent="CombatScene"]
-script = ExtResource("4_35sma")
 
 [node name="CardDeck" type="Node" parent="CombatScene"]
 script = ExtResource("4_35sma")

@@ -3,6 +3,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+
 public partial class CombatManager : Node
 {
     [Export] private Player player;
@@ -14,8 +15,10 @@ public partial class CombatManager : Node
 
     private bool playerTurn = true;
 
-    // UI container for the hand
-    [Export] private Control cardHand; 
+    [Export] private Control cardHand;
+
+    [Export] private CardDeck cardDeck;
+    private const int CardsPerTurn = 3;
 
     [Export] private PackedScene damageCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/damageCard.tscn");
     [Export] private PackedScene healCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/healCard.tscn");
@@ -24,13 +27,8 @@ public partial class CombatManager : Node
     [Export] private PackedScene burnCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/burnCard.tscn");
     [Export] private PackedScene buffCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/buffCard.tscn");
 
-
-    [Export] private CardDeck cardDeck;
-    private const int CardsPerTurn = 3;
-
     public override void _Ready()
     {
-        Logger.Debug("CombatManager Ready");
         attackButton.Pressed += OnAttackPressed;
         UpdateHPLabels();
 
@@ -49,15 +47,15 @@ public partial class CombatManager : Node
 
     private void StartPlayerTurn()
     {
-        Logger.Debug("Player turn begins: drawing cards");
-        player.ProcessEffects(); // ✅ Apply burn, buffs, etc.
+        Logger.Debug($"Player's turn begins, drawing {CardsPerTurn} cards");
+        player.ProcessEffects(); // Apply effect (burn, buffs, etc)
         ClearHand();
 
         for (int i = 0; i < CardsPerTurn; i++)
         {
-            var cardScene = cardDeck.Draw();
+            var cardScene = cardDeck.Draw(); // pull from draw pile
             if (cardScene != null)
-                DrawCard(cardScene);
+                DrawCard(cardScene); // instantiates and adds to hand
         }
 
         playerTurn = true;
@@ -83,7 +81,7 @@ public partial class CombatManager : Node
 
     private void EnemyTurn()
     {
-        enemy.ProcessEffects(); // ✅ Enemy effects tick before they attack
+        enemy.ProcessEffects(); // Enemy effects tick before they attack
         if (enemy.Health <= 0)
         {
             BattleWon();
@@ -127,8 +125,10 @@ public partial class CombatManager : Node
 
     private void ClearHand()
     {
-        foreach (var child in cardHand.GetChildren())        
-            child.QueueFree();        
+        foreach (var child in cardHand.GetChildren())
+        {
+            child.QueueFree();
+        }
     }
 
     private void CheckTurnEnd()
@@ -136,8 +136,14 @@ public partial class CombatManager : Node
         if (cardHand.GetChildCount() == 0)
         {
             Logger.Debug("Player has used all cards");
-            playerTurn = false;
-            EnemyTurn();
+
+            bool skip = false;
+            if (skip)
+            if (skip)
+            {
+                playerTurn = false;
+                EnemyTurn();
+            }
         }
     }
 

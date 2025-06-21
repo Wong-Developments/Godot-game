@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Scripts.Core;
 using Godot;
 using System;
 
@@ -17,7 +17,7 @@ public partial class DamageBuffEffect : StatusEffect
     protected override void OnApply()
     {
         target.BaseDamage = (int)(target.BaseDamage * multiplier);
-        Logger.Debug($"{target.Name}'s damage increased by {multiplier}x for {Duration} turns.");
+        Logger.Info($"{target.Name}'s damage increased by {multiplier}x for {Duration} turns.");
     }
 
     protected override void OnTick() { } // No per-turn tick needed for this one
@@ -25,6 +25,6 @@ public partial class DamageBuffEffect : StatusEffect
     protected override void OnExpire()
     {
         target.BaseDamage = (int)(target.BaseDamage / multiplier);
-        Logger.Debug($"{target.Name}'s damage buff expired.");
+        Logger.Info($"{target.Name}'s damage buff expired.");
     }
 }

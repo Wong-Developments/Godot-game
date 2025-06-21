@@ -1,4 +1,4 @@
-using Game.Core;
+using Game.Scripts.Core;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ public partial class CardDeck : Node
     {
         if (deck.Count == 0)
         {
-            GD.Print("Deck is empty. Reshuffling discard pile...");
+            Logger.Debug("Deck is empty. Reshuffling discard pile...");
             ReshuffleDiscardPile();
         }
 

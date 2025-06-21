@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 using System.Collections.Generic;
-using Game.Core;
+using Game.Scripts.Core;
 
 public abstract partial class Character : Node2D
 {
@@ -21,7 +21,7 @@ public abstract partial class Character : Node2D
 
     public virtual int Attack()
     {
-        Logger.Debug($"{Name} attacks!");
+        Logger.Debug($"{Name} attacks for {BaseDamage} damage!");
         return BaseDamage;
     }
 
@@ -44,7 +44,7 @@ public abstract partial class Character : Node2D
             Logger.Info($"{Name} took {damageLeft} damage. HP is now {Health}");
         }
 
-        Logger.Debug($"Raw: {amount} | After Shield: {damageLeft} | Shield: {Shield} | HP: {Health}/{maxHealth}");
+        //Logger.Debug($"Raw: {amount} | After Shield: {damageLeft} | Shield: {Shield} | HP: {Health}/{maxHealth}");
     }
 
     public void Heal(int amount)
