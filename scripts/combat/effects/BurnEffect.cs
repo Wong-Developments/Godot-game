@@ -15,7 +15,7 @@ public partial class BurnEffect : StatusEffect
         Logger.Info($"{target.Name} is burned for {Duration} turns!");
     }
 
-    protected override void OnTick()
+    protected override void OnTurn()
     {
         int burnDamage = 5;
         target.TakeDamage(burnDamage);

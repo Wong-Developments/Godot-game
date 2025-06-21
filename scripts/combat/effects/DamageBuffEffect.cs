@@ -20,7 +20,7 @@ public partial class DamageBuffEffect : StatusEffect
         Logger.Info($"{target.Name}'s damage increased by {multiplier}x for {Duration} turns.");
     }
 
-    protected override void OnTick() { } // No per-turn tick needed for this one
+    protected override void OnTurn() { } // No per-turn tick needed for this one
 
     protected override void OnExpire()
     {

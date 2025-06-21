@@ -51,7 +51,17 @@ public partial class CardDeck : Node
 
     private void ReshuffleDiscardPile()
     {
-        foreach (var card in discardPile)
+        var shuffled = new List<PackedScene>(discardPile);
+        discardPile.Clear();
+
+        // Fisher-Yates shuffle
+        for (int i = shuffled.Count - 1; i > 0; i--)
+        {
+            int j = rng.Next(i + 1);
+            (shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
+        }
+
+        foreach (var card in shuffled)
             deck.Enqueue(card);
 
         discardPile.Clear();

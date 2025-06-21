@@ -30,7 +30,6 @@ scale = Vector2(0.8, 0.8)
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
 [node name="CardHand" type="HBoxContainer" parent="CombatScene/UI"]
-anchors_preset = -1
 offset_left = 819.37
 offset_top = 431.0
 offset_right = 819.37

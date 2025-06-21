@@ -17,13 +17,13 @@ public abstract partial class StatusEffect : Node
 
     public void Tick()
     {
-        OnTick();
+        OnTurn();
         Duration--;
         if (Duration <= 0)
             OnExpire();
     }
 
     protected abstract void OnApply();
-    protected abstract void OnTick();
+    protected abstract void OnTurn(); // was "OnTick"
     protected abstract void OnExpire();
 }
