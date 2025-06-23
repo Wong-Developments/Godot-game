@@ -1,6 +1,8 @@
+using Game.Scripts.Combat.Effects;
 using Game.Scripts.Core;
 using Godot;
 
+namespace Game.Scripts.Combat.Cards;
 public partial class BuffCard : Card
 {
     public override string CardName => "Buff";

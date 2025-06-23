@@ -1,10 +1,10 @@
-using Game.Overworld.Player;
+using Game.Scripts.Overworld.Player;
 using Game.Scripts.Core;
 using Godot;
 using System;
 
 
-namespace Game.Overworld.Player.States;
+namespace Game.Scripts.Overworld.Player.States;
 
 public partial class FreeRoam : State
 {

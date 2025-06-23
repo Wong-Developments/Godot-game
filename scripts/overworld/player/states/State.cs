@@ -1,7 +1,7 @@
 using Game.Scripts.Core;
 using Godot;
 
-namespace Game.Overworld.Player.States;
+namespace Game.Scripts.Overworld.Player.States;
 
 public abstract partial class State : Node
 {

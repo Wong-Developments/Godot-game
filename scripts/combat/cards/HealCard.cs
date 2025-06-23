@@ -1,7 +1,9 @@
+using Game.Scripts.Combat.Effects;
 using Game.Scripts.Core;
 using Godot;
 using System;
 
+namespace Game.Scripts.Combat.Cards;
 public partial class HealCard : Card
 {
     public override string CardName => "Heal";

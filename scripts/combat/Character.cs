@@ -1,9 +1,11 @@
+using Game.Scripts.Combat.Cards;
+using Game.Scripts.Combat.Effects;
 using Godot;
 using System;
-
 using System.Collections.Generic;
 using Game.Scripts.Core;
 
+namespace Game.Scripts.Combat;
 public abstract partial class Character : Node2D
 {
     [Export] public int maxHealth = 100;

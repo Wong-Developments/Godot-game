@@ -1,9 +1,9 @@
-using Game.Overworld.Enemies.States;
+using Game.Scripts.Overworld.Enemies.States;
 using Game.Scripts.Core;
 using Godot;
 using System;
 
-namespace Game.Overworld.Enemies.Monster;
+namespace Game.Scripts.Overworld.Enemies.Monster;
 public partial class MonsterAnimation : AnimatedSprite2D
 {
 	[Export] public FreeRoam state;

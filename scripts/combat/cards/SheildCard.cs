@@ -1,7 +1,9 @@
+using Game.Scripts.Combat.Effects;
 using Game.Scripts.Core;
 using Godot;
 using System;
 
+namespace Game.Scripts.Combat.Cards;
 public partial class SheildCard: Card
 {
     public override string CardName => "Sheild";

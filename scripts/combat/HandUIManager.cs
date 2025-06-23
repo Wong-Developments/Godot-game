@@ -1,7 +1,10 @@
+using Game.Scripts.Combat.Cards;
+using Game.Scripts.Combat.Effects;
 using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace Game.Scripts.Combat;
 public partial class HandUIManager : Node
 {
     [Export] private Control handContainer;

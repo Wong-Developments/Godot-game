@@ -1,7 +1,9 @@
-using Game.Overworld.Player;
+using Game.Scripts.Combat.Cards;
+using Game.Scripts.Overworld.Player;
 using Godot;
 using System;
 
+namespace Game.Scripts.Combat.Effects;
 public abstract partial class StatusEffect : Node
 {
     public int Duration { get; protected set; }

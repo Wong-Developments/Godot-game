@@ -1,9 +1,9 @@
 using Game.Scripts.Core;
-using Game.Overworld.Player.States;
+using Game.Scripts.Overworld.Player.States;
 using Godot;
 using System;
 
-namespace Game.Overworld.Player;
+namespace Game.Scripts.Overworld.Player;
 
 public partial class CharacterAnimation : AnimatedSprite2D
 {

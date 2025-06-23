@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace Game.Overworld.Enemies.States;
+namespace Game.Scripts.Overworld.Enemies.States;
 
 public partial class StateMachine : Node
 {

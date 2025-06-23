@@ -1,6 +1,8 @@
+using Game.Scripts.Combat.Effects;
 using Godot;
 using System;
 
+namespace Game.Scripts.Combat.Cards;
 public abstract partial class Card : Button
 {
     public abstract string CardName { get; }

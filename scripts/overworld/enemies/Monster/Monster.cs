@@ -1,8 +1,8 @@
-using Game.Overworld.Enemies.States;
+using Game.Scripts.Overworld.Enemies.States;
 using Godot;
 using System;
 
-namespace Game.Overworld.Enemies.Monster;
+namespace Game.Scripts.Overworld.Enemies.Monster;
 
 public partial class Monster : Enemy
 {

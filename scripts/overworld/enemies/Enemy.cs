@@ -1,8 +1,8 @@
-using Game.Overworld.Enemies.States;
+using Game.Scripts.Overworld.Enemies.States;
 using Godot;
 using System;
 
-namespace Game.Overworld.Enemies;
+namespace Game.Scripts.Overworld.Enemies;
 
 public abstract partial class Enemy : CharacterBody2D
 {

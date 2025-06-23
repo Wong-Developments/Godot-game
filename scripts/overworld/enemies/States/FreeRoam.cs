@@ -1,8 +1,8 @@
 using Game.Scripts.Core;
-using Game.Overworld.Player;
+using Game.Scripts.Overworld.Player;
 using Godot;
 
-namespace Game.Overworld.Enemies.States;
+namespace Game.Scripts.Overworld.Enemies.States;
 
 public partial class FreeRoam : State
 {

@@ -1,7 +1,9 @@
+using Game.Scripts.Combat.Cards;
 using Game.Scripts.Core;
 using Godot;
 using System;
 
+namespace Game.Scripts.Combat.Effects;
 public partial class BurnEffect : StatusEffect
 {
     public BurnEffect(int duration)

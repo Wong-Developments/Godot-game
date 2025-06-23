@@ -1,9 +1,11 @@
+using Game.Scripts.Combat.Cards;
+using Game.Scripts.Combat.Effects;
 using Game.Scripts.Core;
 using Godot;
 using System;
 using System.Collections.Generic;
 
-
+namespace Game.Scripts.Combat;
 public partial class CombatManager : Node
 {
     private bool playerTurn = true;
