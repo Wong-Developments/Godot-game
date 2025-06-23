@@ -1,14 +1,11 @@
-using Game.Scripts.Overworld.Player.States;
+using Game.Scripts.Overworld.States;
 using Godot;
 using System;
 
 namespace Game.Scripts.Overworld.Player;
 
-public partial class Character : CharacterBody2D
+public partial class Character : Entity
 {
-	[Export] public StateMachine stateMachine;
-
-	[Export] public float speed;
 	public override void _Ready()
 	{
 		AddToGroup("player");
@@ -17,7 +14,7 @@ public partial class Character : CharacterBody2D
 
 	public override void _Process(double delta)
 	{
-		stateMachine.PhysicsUpdate(delta);
+		stateMachine.PhysicsUpdate((float)delta);
 		Position.Round();
 	}
 }

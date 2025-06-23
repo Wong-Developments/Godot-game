@@ -1,11 +1,10 @@
-using Game.Scripts.Overworld.Enemies.States;
+using Game.Scripts.Overworld.States;
 using Godot;
 using System;
 
 namespace Game.Scripts.Overworld.Enemies;
 
-public abstract partial class Enemy : CharacterBody2D
+public abstract partial class Enemy : Entity
 {
-	[Export] public float speed;
-	[Export] public StateMachine stateMachine;
+    // more defaults for base enemy if needed
 }

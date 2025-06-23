@@ -2,9 +2,9 @@ using Game.Scripts.Overworld.Player;
 using Game.Scripts.Core;
 using Godot;
 using System;
+using Game.Scripts.Overworld.States;
 
-
-namespace Game.Scripts.Overworld.Player.States;
+namespace Game.Scripts.Overworld.Player;
 
 public partial class FreeRoam : State
 {
@@ -14,16 +14,6 @@ public partial class FreeRoam : State
 	public Vector2 velocity;
 	public override void _Ready()
 	{
-		
-	}
-
-	public override void PhysicsUpdate(double delta)
-	{
-        if (direction != Vector2.Zero)
-            EmitSignal(SignalName.Animation, "walk");
-        else
-            EmitSignal(SignalName.Animation, "idle");
-
         if (stateMachine == null)
             Logger.Debug("stateMachine is null");
 
@@ -32,13 +22,20 @@ public partial class FreeRoam : State
 
         if (stateMachine?.owner?.speed == null)
             Logger.Debug("stateMachine owner speed is null");
+    }
 
+	public override void PhysicsUpdate(float delta)
+	{
+        if (direction != Vector2.Zero)
+            EmitSignal(SignalName.Animation, "walk");
+        else
+            EmitSignal(SignalName.Animation, "idle");
 
-        double? speed = stateMachine?.owner?.speed;
+        float speed = stateMachine.owner.speed;
 
         direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         stateMachine.owner.Velocity.Normalized();
-        stateMachine.owner.Velocity = direction * (float)speed;
+        stateMachine.owner.Velocity = direction * speed;
         stateMachine.owner.Velocity.Round();
 
         stateMachine.owner.MoveAndSlide();

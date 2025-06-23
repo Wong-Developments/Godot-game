@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://e55f33p2dxry" path="res://assets/character/volkner_by_aveontrainer_denaay8.png" id="1_aj0fn"]
 [ext_resource type="Script" uid="uid://y2fuygtvrpqe" path="res://scripts/overworld/player/Character.cs" id="1_dxmph"]
 [ext_resource type="Script" uid="uid://drcwrekcsm1ot" path="res://scripts/overworld/player/CharacterAnimation.cs" id="2_woydv"]
-[ext_resource type="Script" uid="uid://b1gf2o10tgvxq" path="res://scripts/overworld/player/states/StateMachine.cs" id="4_dyp2m"]
-[ext_resource type="Script" uid="uid://cil2ag8wdli4i" path="res://scripts/overworld/player/states/FreeRoam.cs" id="5_kqtwu"]
+[ext_resource type="Script" uid="uid://lwgwf0busndq" path="res://scripts/overworld/states/StateMachine.cs" id="4_dyp2m"]
+[ext_resource type="Script" uid="uid://detcl63mlou5p" path="res://scripts/overworld/player/FreeRoam.cs" id="5_atpat"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a6ml"]
 atlas = ExtResource("1_aj0fn")
@@ -298,5 +298,5 @@ owner = NodePath("..")
 currentState = NodePath("FreeRoam")
 
 [node name="FreeRoam" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine")]
-script = ExtResource("5_kqtwu")
+script = ExtResource("5_atpat")
 stateMachine = NodePath("..")

@@ -1,4 +1,4 @@
-using Game.Scripts.Overworld.Enemies.States;
+using Game.Scripts.Overworld.States;
 using Game.Scripts.Core;
 using Godot;
 using System;

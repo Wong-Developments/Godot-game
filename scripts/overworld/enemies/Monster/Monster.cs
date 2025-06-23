@@ -1,4 +1,4 @@
-using Game.Scripts.Overworld.Enemies.States;
+using Game.Scripts.Overworld.States;
 using Godot;
 using System;
 
@@ -13,7 +13,7 @@ public partial class Monster : Enemy
 
 	public override void _Process(double delta)
 	{
-		stateMachine.PhysicsUpdate(delta);
+		stateMachine.PhysicsUpdate((float)delta);
 		Position.Round();
 	}
 }

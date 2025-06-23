@@ -7,7 +7,7 @@ namespace Game.Scripts.Combat.Effects;
 public abstract partial class StatusEffect : Node
 {
     public int Duration { get; protected set; }
-    public string Name { get; protected set; }
+    public new string Name { get; protected set; }
 
     protected Character target; // could be Player or Enemy
 

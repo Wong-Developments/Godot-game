@@ -1,5 +1,5 @@
 using Game.Scripts.Core;
-using Game.Scripts.Overworld.Player.States;
+using Game.Scripts.Overworld.States;
 using Godot;
 using System;
 

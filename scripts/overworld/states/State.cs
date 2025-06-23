@@ -1,12 +1,17 @@
 using Game.Scripts.Core;
 using Godot;
 
-namespace Game.Scripts.Overworld.Enemies.States;
+namespace Game.Scripts.Overworld.States;
 
 public abstract partial class State : Node
 {
     [Export] public StateMachine stateMachine;
 
+    public override void _Ready()
+    {
+        if (stateMachine is null)
+            Logger.Error("Assigned stateMachine is not of type State.");
+    }
     public virtual void EnterState()
     {
         Logger.Info($"Entering {GetType().Name} state...");
@@ -17,7 +22,7 @@ public abstract partial class State : Node
         Logger.Info($"Exiting {GetType().Name} state...");
     }
 
-    public virtual void PhysicsUpdate(double delta)
+    public virtual void PhysicsUpdate(float delta)
     {
 
     }
