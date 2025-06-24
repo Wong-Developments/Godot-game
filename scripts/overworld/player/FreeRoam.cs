@@ -8,28 +8,9 @@ namespace Game.Scripts.Overworld.Player;
 
 public partial class FreeRoam : State
 {
-	[Signal] public delegate void AnimationEventHandler(string animationName);
-
-	public Vector2 direction;
-	public Vector2 velocity;
-	public override void _Ready()
-	{
-        if (stateMachine == null)
-            Logger.Debug("stateMachine is null");
-
-        if (stateMachine?.owner == null)
-            Logger.Debug("stateMachine owner is null");
-
-        if (stateMachine?.owner?.speed == null)
-            Logger.Debug("stateMachine owner speed is null");
-    }
-
 	public override void PhysicsUpdate(float delta)
 	{
-        if (direction != Vector2.Zero)
-            EmitSignal(SignalName.Animation, "walk");
-        else
-            EmitSignal(SignalName.Animation, "idle");
+        EmitSignal(SignalName.Animation, direction != Vector2.Zero ? "walk" : "idle");
 
         float speed = stateMachine.owner.speed;
 

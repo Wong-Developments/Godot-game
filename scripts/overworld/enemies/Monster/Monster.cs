@@ -1,3 +1,4 @@
+using Game.Scripts.Core;
 using Game.Scripts.Overworld.States;
 using Godot;
 using System;
@@ -6,7 +7,12 @@ namespace Game.Scripts.Overworld.Enemies.Monster;
 
 public partial class Monster : Enemy
 {
-	public override void _Ready()
+    [ExportCategory("Patrol Settings")]
+    [Export] public float patrolMultiplier = 0.5f;
+    [Export] public Vector2 walkDurationRange = new(1.0f, 2.0f);
+    [Export] public Vector2 waitTimeRange = new(0.5f, 5.0f);
+
+    public override void _Ready()
 	{
 		stateMachine.ChangeState(stateMachine.GetNode<State>("FreeRoam"));
 	}

@@ -38,3 +38,6 @@ position = Vector2(162, 154)
 
 [node name="Monster" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("3_lv3y2")]
 position = Vector2(459, 242)
+walkDurationRange = Vector2(2, 2)
+waitTimeRange = Vector2(1, 1)
+detectionRange = 0.0

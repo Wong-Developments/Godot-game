@@ -6,6 +6,8 @@ namespace Game.Scripts.Overworld.States;
 public abstract partial class State : Node
 {
     [Export] public StateMachine stateMachine;
+    [Signal] public delegate void AnimationEventHandler(string animationName);
+    public Vector2 direction;
 
     public override void _Ready()
     {
@@ -24,6 +26,6 @@ public abstract partial class State : Node
 
     public virtual void PhysicsUpdate(float delta)
     {
-
+        EmitSignal(SignalName.Animation, direction != Vector2.Zero ? "walk" : "idle");
     }
 }

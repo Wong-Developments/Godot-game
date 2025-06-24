@@ -2,6 +2,7 @@ using Game.Scripts.Overworld.States;
 using Game.Scripts.Core;
 using Godot;
 using System;
+using Godot.Collections;
 
 namespace Game.Scripts.Overworld.Enemies.Monster;
 public partial class MonsterAnimation : AnimatedSprite2D
@@ -9,78 +10,47 @@ public partial class MonsterAnimation : AnimatedSprite2D
 	[Export] public FreeRoam state;
 
 	[ExportCategory("Animation Vars")]
-	[Export] ECharacterAnimation ECharacterAnimation = ECharacterAnimation.idle_down;
+	[Export] ECharacterAnimation currentAnimation = ECharacterAnimation.idle_down;
 
-	public override void _Ready()
+    private Vector2 lastDirection = new(0, 1);
+
+    public override void _Ready()
 	{
 		Logger.Info("Loading player animation component...");
 		state.Animation += PlayAnimation;
 	}
 
-	public void PlayAnimation(string animationType)
-	{
-		ECharacterAnimation previousAnimation = ECharacterAnimation;
+    public void PlayAnimation(string animationType)
+    {
+        ECharacterAnimation previousAnimation = currentAnimation;
 
-		float angle = state.direction.Normalized().Angle();
+        // Update last known direction if actively moving
+        if (state.direction != Vector2.Zero)
+            lastDirection = state.direction;
 
-		switch (animationType)
-		{
-			case "walk":
-				if (Mathf.Abs(state.direction.X) > Mathf.Abs(state.direction.Y))
-				{
-					if (state.direction.X > 0)
-					{
-						ECharacterAnimation = ECharacterAnimation.walk_right;
-					}
-					else
-					{
-						ECharacterAnimation = ECharacterAnimation.walk_left;
-					}
-				}
-				else
-				{
-					if (state.direction.Y > 0)
-					{
-						ECharacterAnimation = ECharacterAnimation.walk_down;
-					}
-					else
-					{
-						ECharacterAnimation = ECharacterAnimation.walk_up;
-					}
-				}
-				break;
-			case "idle":
-				if (Mathf.Abs(state.direction.X) > Mathf.Abs(state.direction.Y))
-				{
-					if (state.direction.X > 0)
-					{
-						ECharacterAnimation = ECharacterAnimation.idle_right;
-					}
-					else
-					{
-						ECharacterAnimation = ECharacterAnimation.idle_left;
-					}
-				}
-				else
-				{
-					if (state.direction.Y > 0)
-					{
-						ECharacterAnimation = ECharacterAnimation.idle_down;
-					}
-					else
-					{
-						ECharacterAnimation = ECharacterAnimation.idle_up;
-					}
-				}
-				break;
-		}
+        Vector2 dir = animationType == "walk" ? state.direction : lastDirection;
 
-		if (previousAnimation != ECharacterAnimation)
-		{
-			Logger.Info($"Playing animation {ECharacterAnimation.ToString()}");
-			Play(ECharacterAnimation.ToString());
-		}
+        switch (animationType)
+        {
+            case "walk":
+                if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))                
+                    currentAnimation = dir.X > 0 ? ECharacterAnimation.walk_right : ECharacterAnimation.walk_left;                
+                else                
+                    currentAnimation = dir.Y > 0 ? ECharacterAnimation.walk_down : ECharacterAnimation.walk_up;                
+                break;
 
-	}
+            case "idle":
+                if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))                
+                    currentAnimation = dir.X > 0 ? ECharacterAnimation.idle_right : ECharacterAnimation.idle_left;                
+                else                
+                    currentAnimation = dir.Y > 0 ? ECharacterAnimation.idle_down : ECharacterAnimation.idle_up;                
+                break;
+        }
 
+        if (previousAnimation != currentAnimation)
+        {
+            Logger.Info($"Playing animation {currentAnimation}");
+            Play(currentAnimation.ToString());
+        }
+    }
 }

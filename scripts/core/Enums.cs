@@ -1,3 +1,6 @@
+using Godot;
+using Godot.Collections;
+
 namespace Game.Scripts.Core;
 
 public enum LogLevel
