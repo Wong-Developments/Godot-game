@@ -21,12 +21,12 @@ deckManager = NodePath("CombatScene/DeckManager")
 
 [node name="Player" parent="CombatScene" instance=ExtResource("3_b521f")]
 z_index = 1
-position = Vector2(19, 250)
-scale = Vector2(2, 2)
+position = Vector2(34, 275)
+scale = Vector2(5, 5)
 
 [node name="Enemy" parent="CombatScene" instance=ExtResource("5_tkdkq")]
-position = Vector2(799, 93)
-scale = Vector2(0.8, 0.8)
+position = Vector2(458, 18)
+scale = Vector2(5, 5)
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
