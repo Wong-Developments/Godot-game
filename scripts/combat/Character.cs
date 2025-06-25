@@ -14,18 +14,22 @@ public abstract partial class Character : Node2D
     public int Shield { get; protected set; } = 0;
     public int BaseDamage { get; set; } = 10;
 
+
     public List<StatusEffect> ActiveEffects { get; private set; } = new();
 
     public override void _Ready()
     {
         Health = maxHealth;
     }
+    public bool IsAlive() => Health > 0;
+
 
     public virtual int Attack()
     {
         Logger.Debug($"{Name} attacks for {BaseDamage} damage!");
         return BaseDamage;
     }
+
 
     public virtual void TakeDamage(int amount)
     {
@@ -82,5 +86,6 @@ public abstract partial class Character : Node2D
                 ActiveEffects.RemoveAt(i);
         }
     }
+
 }
 

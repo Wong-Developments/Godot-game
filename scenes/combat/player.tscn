@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddvclakokritu"]
+[gd_scene load_steps=5 format=3 uid="uid://ddvclakokritu"]
 
 [ext_resource type="Script" uid="uid://cgeii6h1h2ol5" path="res://scripts/combat/Player.cs" id="1_lxv2u"]
 [ext_resource type="Texture2D" uid="uid://bxrjc170k6e54" path="res://assets/Drive/Combat Sprites/LionKnight-Back.png" id="2_lxv2u"]
+[ext_resource type="Script" uid="uid://bl71xo5bikwgk" path="res://scripts/combat/TargetReceiver.cs" id="3_2iox7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2iox7"]
+size = Vector2(288, 288)
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_lxv2u")
@@ -11,3 +15,10 @@ texture_filter = 1
 position = Vector2(36, 35)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_lxv2u")
+
+[node name="DropArea" type="Area2D" parent="."]
+script = ExtResource("3_2iox7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropArea"]
+position = Vector2(144, 144)
+shape = SubResource("RectangleShape2D_2iox7")
