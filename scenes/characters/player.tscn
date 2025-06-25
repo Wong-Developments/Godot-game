@@ -274,7 +274,7 @@ script = ExtResource("1_dxmph")
 stateMachine = NodePath("StateMachine")
 speed = 100.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 texture_filter = 1
 position = Vector2(0, -8)
@@ -282,7 +282,6 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aj0fn")
 animation = &"walk_down"
 script = ExtResource("2_woydv")
-state = NodePath("../StateMachine/FreeRoam")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(8, 8)

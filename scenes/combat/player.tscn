@@ -5,20 +5,20 @@
 [ext_resource type="Script" uid="uid://bl71xo5bikwgk" path="res://scripts/combat/TargetReceiver.cs" id="3_2iox7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2iox7"]
-size = Vector2(288, 288)
+size = Vector2(72, 71)
 
-[node name="Player" type="Node2D"]
+[node name="Player2" type="Node2D"]
 script = ExtResource("1_lxv2u")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(36, 35)
-scale = Vector2(0.1, 0.1)
+position = Vector2(36, 35.5)
+scale = Vector2(0.1, 0.0986111)
 texture = ExtResource("2_lxv2u")
 
 [node name="DropArea" type="Area2D" parent="."]
 script = ExtResource("3_2iox7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropArea"]
-position = Vector2(144, 144)
+position = Vector2(36, 35.5)
 shape = SubResource("RectangleShape2D_2iox7")
