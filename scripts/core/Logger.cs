@@ -32,7 +32,7 @@ public static class Logger
             GD.PrintRich($"{logHeader} {string.Join(" ", message.Select(m => m.ToString().Color(level.GetLevelColor())))}");
         }
         else        
-            GD.PrintRich([$"[color=RED]Frame Error: unable to capture logging context[/color] ", .. message]);        
+            GD.PrintRich([$"[color=RED]Frame Error: unable to capture logging context[/color] ", .. message]);
     }
 
     public static string GetLevelColor(this LogLevel level) => level switch

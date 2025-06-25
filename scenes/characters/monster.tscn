@@ -26,7 +26,6 @@ sprite_frames = ExtResource("2_emo4d")
 animation = &"idle_up"
 script = ExtResource("3_emo4d")
 state = NodePath("../StateMachine/FreeRoam")
-ECharacterAnimation = 2
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner", "currentState")]
 script = ExtResource("3_qxax2")

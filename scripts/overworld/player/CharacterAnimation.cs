@@ -5,45 +5,38 @@ using System;
 
 namespace Game.Scripts.Overworld.Player;
 
-public partial class CharacterAnimation : AnimatedSprite2D
+public partial class CharacterAnimation : EntityAnimation
 {
-
-	[ExportCategory("Nodes")]
-	[Export] public FreeRoam freeRoam;
-
-	[ExportCategory("Animation Vars")]
-	[Export] ECharacterAnimation ECharacterAnimation = ECharacterAnimation.idle_down;
-
-	public override void _Ready()
+    public override void _Ready()
 	{
 		Logger.Info("Loading player animation component...");
-		freeRoam.Animation += PlayAnimation;
+		state.Animation += PlayAnimation;
 	}
 
-	public void PlayAnimation(string animationType)
-	{
-		ECharacterAnimation previousAnimation = ECharacterAnimation;
+    /*public override void PlayAnimation(string animationType)
+    {
+        ECharacterAnimation previousAnimation = currentAnimation;
 
-		switch (animationType)
-		{
-			case "walk":
-				if (freeRoam.direction == Vector2.Up) ECharacterAnimation = ECharacterAnimation.walk_up;
-				else if (freeRoam.direction == Vector2.Down) ECharacterAnimation = ECharacterAnimation.walk_down;
-				else if (freeRoam.direction == Vector2.Left) ECharacterAnimation = ECharacterAnimation.walk_left;
-				else if (freeRoam.direction == Vector2.Right) ECharacterAnimation = ECharacterAnimation.walk_right;
-				break;
-			case "idle":
-				if (ECharacterAnimation == ECharacterAnimation.walk_up) ECharacterAnimation = ECharacterAnimation.idle_up;
-				else if (ECharacterAnimation == ECharacterAnimation.walk_down) ECharacterAnimation = ECharacterAnimation.idle_down;
-				else if (ECharacterAnimation == ECharacterAnimation.walk_left) ECharacterAnimation = ECharacterAnimation.idle_left;
-				else if (ECharacterAnimation == ECharacterAnimation.walk_right) ECharacterAnimation = ECharacterAnimation.idle_right;
-				break;
-		}
+        switch (animationType)
+        {
+            case "walk":
+                if (state.direction == Vector2.Up) currentAnimation = ECharacterAnimation.walk_up;
+                else if (state.direction == Vector2.Down) currentAnimation = ECharacterAnimation.walk_down;
+                else if (state.direction == Vector2.Left) currentAnimation = ECharacterAnimation.walk_left;
+                else if (state.direction == Vector2.Right) currentAnimation = ECharacterAnimation.walk_right;
+                break;
+            case "idle":
+                if (currentAnimation == ECharacterAnimation.walk_up) currentAnimation = ECharacterAnimation.idle_up;
+                else if (currentAnimation == ECharacterAnimation.walk_down) currentAnimation = ECharacterAnimation.idle_down;
+                else if (currentAnimation == ECharacterAnimation.walk_left) currentAnimation = ECharacterAnimation.idle_left;
+                else if (currentAnimation == ECharacterAnimation.walk_right) currentAnimation = ECharacterAnimation.idle_right;
+                break;
+        }
 
-		if (previousAnimation != ECharacterAnimation)
-		{
-			Logger.Info($"Playing animation {ECharacterAnimation.ToString()}");
-			Play(ECharacterAnimation.ToString());
-		}
-	}
+        if (previousAnimation != currentAnimation)
+        {
+            //Logger.Info($"Playing animation {currentAnimation}");
+            Play(currentAnimation.ToString());
+        }
+    }*/
 }

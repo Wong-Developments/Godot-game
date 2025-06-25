@@ -5,26 +5,18 @@ using System;
 using Godot.Collections;
 
 namespace Game.Scripts.Overworld.Enemies.Monster;
-public partial class MonsterAnimation : AnimatedSprite2D
+public partial class MonsterAnimation : EntityAnimation
 {
-	[Export] public FreeRoam state;
-
-	[ExportCategory("Animation Vars")]
-	[Export] ECharacterAnimation currentAnimation = ECharacterAnimation.idle_down;
-
-    private Vector2 lastDirection = new(0, 1);
-
     public override void _Ready()
 	{
 		Logger.Info("Loading player animation component...");
 		state.Animation += PlayAnimation;
 	}
 
-    public void PlayAnimation(string animationType)
+    public override void PlayAnimation(string animationType)
     {
         ECharacterAnimation previousAnimation = currentAnimation;
 
-        // Update last known direction if actively moving
         if (state.direction != Vector2.Zero)
             lastDirection = state.direction;
 
