@@ -83,8 +83,6 @@ public partial class FreeRoam : EnemyState
         if (waitTime != 0f || collision == null || DetectionRange >= stateMachine.owner.Position.DistanceTo(player.Position))
             return;
 
-        Logger.Info($"OnCollision");
-
         // Dot product between movement direction and collision normal
         var hitNormal = collision.GetNormal();
         var hitAngle = direction.Dot(hitNormal);

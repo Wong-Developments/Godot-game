@@ -8,7 +8,7 @@ namespace Game.Scripts.Overworld.Enemies.Monster;
 public partial class Monster : Enemy
 {
     [ExportCategory("Patrol Settings")]
-    [Export] public float patrolMultiplier = 0.5f;
+    [Export] public float patrolMultiplier = 1f;
     [Export] public Vector2 walkDurationRange = new(1.0f, 2.0f);
     [Export] public Vector2 waitTimeRange = new(0.5f, 5.0f);
 

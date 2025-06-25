@@ -8,10 +8,10 @@ namespace Game.Scripts.Overworld.Enemies.Monster;
 public partial class MonsterAnimation : EntityAnimation
 {
     public override void _Ready()
-	{
-		Logger.Info("Loading player animation component...");
-		state.Animation += PlayAnimation;
-	}
+    {
+        Logger.Info("Loading player animation component...");
+        state.Animation += PlayAnimation;
+    }
 
     public override void PlayAnimation(string animationType)
     {
@@ -25,17 +25,17 @@ public partial class MonsterAnimation : EntityAnimation
         switch (animationType)
         {
             case "walk":
-                if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))                
-                    currentAnimation = dir.X > 0 ? ECharacterAnimation.walk_right : ECharacterAnimation.walk_left;                
-                else                
-                    currentAnimation = dir.Y > 0 ? ECharacterAnimation.walk_down : ECharacterAnimation.walk_up;                
+                if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))
+                    currentAnimation = dir.X > 0 ? ECharacterAnimation.walk_right : ECharacterAnimation.walk_left;
+                else
+                    currentAnimation = dir.Y > 0 ? ECharacterAnimation.walk_down : ECharacterAnimation.walk_up;
                 break;
 
             case "idle":
-                if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))                
-                    currentAnimation = dir.X > 0 ? ECharacterAnimation.idle_right : ECharacterAnimation.idle_left;                
-                else                
-                    currentAnimation = dir.Y > 0 ? ECharacterAnimation.idle_down : ECharacterAnimation.idle_up;                
+                if (Mathf.Abs(dir.X) > Mathf.Abs(dir.Y))
+                    currentAnimation = dir.X > 0 ? ECharacterAnimation.idle_right : ECharacterAnimation.idle_left;
+                else
+                    currentAnimation = dir.Y > 0 ? ECharacterAnimation.idle_down : ECharacterAnimation.idle_up;
                 break;
         }
 

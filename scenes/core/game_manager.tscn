@@ -37,8 +37,7 @@ texture_filter = 1
 position = Vector2(162, 154)
 
 [node name="Monster" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("3_lv3y2")]
-position = Vector2(276, 142)
+position = Vector2(297, 160)
 patrolMultiplier = 1.0
 walkDurationRange = Vector2(2, 2)
-waitTimeRange = Vector2(1, 1)
-detectionRange = 0.0
+detectionRange = 75.0

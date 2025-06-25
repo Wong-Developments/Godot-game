@@ -269,6 +269,7 @@ animations = [{
 size = Vector2(16, 8)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine")]
+position = Vector2(8, 20)
 script = ExtResource("1_dxmph")
 stateMachine = NodePath("StateMachine")
 speed = 100.0
@@ -276,7 +277,7 @@ speed = 100.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state")]
 z_index = 1
 texture_filter = 1
-position = Vector2(8, 4)
+position = Vector2(0, -8)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_aj0fn")
 animation = &"walk_down"
@@ -289,7 +290,6 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(8, 12)
 shape = SubResource("RectangleShape2D_dyp2m")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner", "currentState")]
