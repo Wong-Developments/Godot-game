@@ -1,24 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://bf206421p4rb4"]
 
 [ext_resource type="Script" uid="uid://46ohmboygxst" path="res://scripts/combat/Enemy.cs" id="1_dxtal"]
-[ext_resource type="Texture2D" uid="uid://kygw1oxdyrsc" path="res://assets/Drive/Combat Sprites/purple_giant.png" id="1_k8udy"]
+[ext_resource type="Texture2D" uid="uid://bm0ejc3r85vko" path="res://assets/Drive/Combat Sprites/chimessssaraone.png" id="2_8afxw"]
 [ext_resource type="Script" uid="uid://bl71xo5bikwgk" path="res://scripts/combat/TargetReceiver.cs" id="3_8afxw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8afxw"]
-size = Vector2(288, 288)
+size = Vector2(335, 288)
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_dxtal")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(144, 144)
+position = Vector2(289, 147)
 scale = Vector2(4, 4)
-texture = ExtResource("1_k8udy")
+texture = ExtResource("2_8afxw")
 
 [node name="DropArea" type="Area2D" parent="."]
 script = ExtResource("3_8afxw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropArea"]
-position = Vector2(144, 144)
+position = Vector2(209.5, 151)
 shape = SubResource("RectangleShape2D_8afxw")

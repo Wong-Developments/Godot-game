@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cjvma3ooyes4m"]
 
-[ext_resource type="Script" uid="uid://mnl0irml476l" path="res://scripts/overworld/enemies/monster/Monster.cs" id="1_jl15v"]
+[ext_resource type="Script" uid="uid://mnl0irml476l" path="res://scripts/overworld/enemies/Monster/Monster.cs" id="1_jl15v"]
 [ext_resource type="SpriteFrames" uid="uid://c5aod432pwnee" path="res://resources/animations/monster.tres" id="2_emo4d"]
-[ext_resource type="Script" uid="uid://ht3arujdlaja" path="res://scripts/overworld/enemies/monster/MonsterAnimation.cs" id="3_emo4d"]
+[ext_resource type="Script" uid="uid://ht3arujdlaja" path="res://scripts/overworld/enemies/Monster/MonsterAnimation.cs" id="3_emo4d"]
 [ext_resource type="Script" uid="uid://lwgwf0busndq" path="res://scripts/overworld/states/StateMachine.cs" id="3_qxax2"]
-[ext_resource type="Script" uid="uid://cehxgqsd2al34" path="res://scripts/overworld/enemies/monster/FreeRoam.cs" id="5_emo4d"]
+[ext_resource type="Script" uid="uid://cehxgqsd2al34" path="res://scripts/overworld/enemies/Monster/FreeRoam.cs" id="5_emo4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fulqv"]
 size = Vector2(48, 24)
