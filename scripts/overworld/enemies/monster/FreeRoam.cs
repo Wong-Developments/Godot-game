@@ -4,8 +4,10 @@ using Game.Scripts.Utils;
 using Godot;
 using System;
 using System.Linq;
+using Game.Scripts.Overworld.Player;
 
 namespace Game.Scripts.Overworld.Enemies.Monster;
+
 
 public partial class FreeRoam : EnemyState
 {
@@ -79,6 +81,13 @@ public partial class FreeRoam : EnemyState
 
     private void OnCollision(KinematicCollision2D collision)
     {
+        if (collision?.GetCollider() is Player.Character)
+        {
+            GD.Print("Collided with Player — switching to combat scene.");
+            GetTree().ChangeSceneToFile("res://scenes/core/combat_manager.tscn");
+            return;
+        }
+
         // Only respond if moving and collision
         if (waitTime != 0f || collision == null || DetectionRange >= stateMachine.owner.Position.DistanceTo(player.Position))
             return;

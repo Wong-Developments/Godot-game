@@ -16,7 +16,6 @@ public partial class CombatManager : Node
     [Export] private Node enemyContainer; // Node holding up to 3 enemy instances
     private List<Enemy> enemies = new();
 
-
     [Export] private Label playerHPLabel;
     [Export] private Label enemyHPLabel;
     [Export] private Button endTurnButton;
@@ -128,16 +127,13 @@ public partial class CombatManager : Node
         }
 
         UpdateHPLabels();
+        CheckBattleOutcome();
 
-        if (player.Health <= 0)
-            BattleLost();
-        else
-        {
-            //playerTurn = true;
-            await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
-            StartPlayerTurn();
-        }
-            
+        if (playerTurn) // Prevent starting turn if player already died
+            return;
+
+        await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+        StartPlayerTurn();
     }
 
     private void AddCardToHand(PackedScene cardScene)
@@ -167,6 +163,8 @@ public partial class CombatManager : Node
         deckManager.Discard(card.SourceScene);
         handUIManager.RemoveCard(card); // ✅ Properly clears from UI
         UpdateHPLabels(); // Optional: reflect new damage/heal
+
+        CheckBattleOutcome();
     }
 
     private bool HandleCardDropped(Card card)
@@ -235,9 +233,6 @@ public partial class CombatManager : Node
         );
     }
 
-
-
-
     private void UpdateHPLabels()
     {
         playerHPLabel.Text = $"Player HP: {player.Health} | Shield: {player.Shield}";
@@ -251,21 +246,40 @@ public partial class CombatManager : Node
         Logger.Debug($"Turn {turnCount} started.");
     }
 
+    private void CheckBattleOutcome()
+    {
+        if (player.Health <= 0)
+        {
+            BattleLost();
+            return;
+        }
+
+        if (enemies.All(e => !e.IsAlive()))
+        {
+            BattleWon();
+        }
+    }
+
+
     private void BattleWon()
     {
         Logger.Info("Enemy defeated!");
+        playerTurn = false;
         endTurnButton.Disabled = true;
         handUIManager.ClearHand();
         deckManager.Reset();
+        GetTree().ChangeSceneToFile("res://scenes/core/game_manager.tscn");
         // TODO: handle victory
     }
 
     private void BattleLost()
     {
         Logger.Info("Player defeated!");
+        playerTurn = false;
         endTurnButton.Disabled = true;
         handUIManager.ClearHand();
         deckManager.Reset();
+        GetTree().ChangeSceneToFile("res://scenes/core/game_manager.tscn");
         // TODO: handle game-over
     }
 }

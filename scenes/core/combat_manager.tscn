@@ -30,10 +30,12 @@ offset_bottom = 40.0
 [node name="Enemy" parent="CombatScene/EnemyContainer" instance=ExtResource("5_tkdkq")]
 position = Vector2(815, 106)
 scale = Vector2(0.8, 0.8)
+maxHealth = 1
 
 [node name="Enemy2" parent="CombatScene/EnemyContainer" instance=ExtResource("5_tkdkq")]
 position = Vector2(485, 135)
 scale = Vector2(0.64, 0.64)
+maxHealth = 1
 
 [node name="UI" type="CanvasLayer" parent="CombatScene"]
 
