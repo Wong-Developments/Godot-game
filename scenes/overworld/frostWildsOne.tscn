@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=4 uid="uid://cea18388pitb6"]
+[gd_scene load_steps=4 format=4 uid="uid://cea18388pitb6"]
 
+[ext_resource type="Script" uid="uid://4q2rfyt13yfy" path="res://scripts/overworld/rooms/RoomInstance.cs" id="1_23w6j"]
 [ext_resource type="TileSet" uid="uid://bec7gbik3f5bo" path="res://resources/tilesets/frostWildsOne.tres" id="1_j0656"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_23w6j"]
+radius = 24.0208
+
 [node name="FrostWildsOne" type="Node2D"]
+script = ExtResource("1_23w6j")
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -21,5 +26,49 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAAKAAAAAAAJAAAAAAAKAAEAAAAJAAEAAAAKAAIAAAAJAAIAAAALAAAAAAAKAAAAAAALAAEAAAAKAAEAAAALAAIAAAAKAAIAAAAMAAAAAAALAAAAAAAMAAEAAAALAAEAAAAMAAIAAAALAAIAAAANAAAAAAAMAAAAAAANAAEAAAAMAAEAAAANAAIAAAAMAAIAAAASABYAAAAJAAAAAAASABcAAAAJAAEAAAASABgAAAAJAAIAAAATABYAAAAKAAAAAAATABcAAAAKAAEAAAATABgAAAAKAAIAAAAUABYAAAALAAAAAAAUABcAAAALAAEAAAAUABgAAAALAAIAAAAVABYAAAAMAAAAAAAVABcAAAAMAAEAAAAVABgAAAAMAAIAAAACAAYAAAAJAAAAAAACAAcAAAAJAAEAAAACAAgAAAAJAAIAAAADAAYAAAAKAAAAAAADAAcAAAAKAAEAAAADAAgAAAAKAAIAAAAEAAYAAAALAAAAAAAEAAcAAAALAAEAAAAEAAgAAAALAAIAAAAFAAYAAAAMAAAAAAAFAAcAAAAMAAEAAAAFAAgAAAAMAAIAAAAMAAsAAAAAAAMAAAAMAAwAAAAAAAQAAAANAAsAAAABAAMAAAANAAwAAAABAAQAAAAaAPr/AAAHAA0AABAaAPv/AAAHAA4AABAaAPz/AAAHAA8AABAbAPr/AAAGAA0AABAbAPv/AAAGAA4AABAbAPz/AAAGAA8AABAcAPr/AAAFAA0AABAcAPv/AAAFAA4AABAcAPz/AAAFAA8AABAdAPn/AAAEAAwAABAdAPr/AAAEAA0AABAdAPv/AAAEAA4AABAdAPz/AAAEAA8AABAeAPj/AAADAAsAABAeAPn/AAADAAwAABAeAPr/AAADAA0AABAfAPf/AAACAAoAABAfAPj/AAACAAsAABAfAPn/AAACAAwAABAfAPr/AAACAA0AABAgAPb/AAABAAkAABAgAPf/AAABAAoAABAgAPj/AAABAAsAABAgAPn/AAABAAwAABAhAPb/AAAAAAkAABAhAPf/AAAAAAoAABD5//j/AAAAAAkAAAD5//n/AAAAAAoAAAD6//j/AAABAAkAAAD6//n/AAABAAoAAAD6//r/AAABAAsAAAD6//v/AAABAAwAAAD7//n/AAACAAoAAAD7//r/AAACAAsAAAD7//v/AAACAAwAAAD7//z/AAACAA0AAAD8//r/AAADAAsAAAD8//v/AAADAAwAAAD8//z/AAADAA0AAAD9//v/AAAEAAwAAAD9//z/AAAEAA0AAAD9//3/AAAEAA4AAAD9//7/AAAEAA8AAAD+//z/AAAFAA0AAAD+//3/AAAFAA4AAAD+//7/AAAFAA8AAAD///z/AAAGAA0AAAD///3/AAAGAA4AAAD///7/AAAGAA8AAAAAAPz/AAAHAA0AAAAAAP3/AAAHAA4AAAAAAP7/AAAHAA8AAAA=")
 tile_set = ExtResource("1_j0656")
 
-[node name="PlayerSpawn" type="Node2D" parent="."]
-position = Vector2(-82, 207)
+[node name="Spawns" type="Node2D" parent="."]
+position = Vector2(367, 357)
+
+[node name="SpawnFromNorth" type="Marker2D" parent="Spawns"]
+position = Vector2(-149, -389)
+
+[node name="SpawnFromSouth" type="Marker2D" parent="Spawns"]
+position = Vector2(-160, 56)
+
+[node name="SpawnFromEast" type="Marker2D" parent="Spawns"]
+position = Vector2(186, -151)
+
+[node name="SpawnFromWest" type="Marker2D" parent="Spawns"]
+position = Vector2(-457, -152)
+
+[node name="NorthDoor" type="Node2D" parent="."]
+position = Vector2(218, -74)
+
+[node name="Trigger" type="Area2D" parent="NorthDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NorthDoor/Trigger"]
+shape = SubResource("CircleShape2D_23w6j")
+
+[node name="SouthDoor" type="Node2D" parent="."]
+position = Vector2(210, 470)
+
+[node name="Trigger" type="Area2D" parent="SouthDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SouthDoor/Trigger"]
+shape = SubResource("CircleShape2D_23w6j")
+
+[node name="EastDoor" type="Node2D" parent="."]
+position = Vector2(618, 207)
+
+[node name="Trigger" type="Area2D" parent="EastDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EastDoor/Trigger"]
+shape = SubResource("CircleShape2D_23w6j")
+
+[node name="WestDoor" type="Node2D" parent="."]
+position = Vector2(-138, 205)
+
+[node name="Trigger" type="Area2D" parent="WestDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WestDoor/Trigger"]
+shape = SubResource("CircleShape2D_23w6j")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbb32sm77jlyx"]
+
+[ext_resource type="Script" uid="uid://co24ft0wcf0id" path="res://scripts/overworld/rooms/RoomManager.cs" id="1_g18sj"]
+[ext_resource type="PackedScene" uid="uid://c7mb04nqxq3aj" path="res://scenes/characters/player.tscn" id="2_yrm0v"]
+
+[node name="RoomManager" type="Node2D" groups=["Player"]]
+script = ExtResource("1_g18sj")
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_yrm0v")]
+texture_filter = 2
+position = Vector2(157, 357)
+scale = Vector2(1.5066, 1.43231)
