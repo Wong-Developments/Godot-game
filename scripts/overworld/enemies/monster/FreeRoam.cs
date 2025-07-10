@@ -5,6 +5,7 @@ using Godot;
 using System;
 using System.Linq;
 using Game.Scripts.Overworld.Player;
+using Game.Scripts.Overworld;
 
 namespace Game.Scripts.Overworld.Enemies.Monster;
 
@@ -81,10 +82,17 @@ public partial class FreeRoam : EnemyState
 
     private void OnCollision(KinematicCollision2D collision)
     {
-        if (collision?.GetCollider() is Player.Character)
+        if (collision?.GetCollider() is Character hitPlayer)
         {
-            GD.Print("Collided with Player — switching to combat scene.");
-            GetTree().ChangeSceneToFile("res://scenes/core/combat_manager.tscn");
+            Logger.Debug($"Switching to combat. Hit player: {hitPlayer.Name}");
+
+            // Store the player in GameManager (if using singleton or root node)
+            var gm = GetNode<GameManager>("/root/GameManager");
+            gm.PlayerRef = hitPlayer;
+
+            Logger.Debug($"PlayerRef set in GameManager: {gm.PlayerRef}");
+
+            gm.SwitchToCombat(hitPlayer); // Switch to combat scene
             return;
         }
 

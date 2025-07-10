@@ -5,6 +5,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Scripts.Overworld;
 
 namespace Game.Scripts.Combat;
 
@@ -55,20 +56,29 @@ public partial class CombatManager : Node
         {
             playerReceiver.OnCardDroppedCallback = HandleCardDropped;
         }
-
         endTurnButton.Text = "End Turn";
         endTurnButton.Pressed += OnEndTurnPressed;
         UpdateHPLabels();
 
-        var allCards = new List<PackedScene> {
-            damageCardScene,
-            healCardScene,
-            sheildCardScene,
-            burnCardScene,
-            buffCardScene
-        };
+        //var allCards = new List<PackedScene> {
+        //    damageCardScene,
+        //    healCardScene,
+        //    sheildCardScene,
+        //    burnCardScene,
+        //    buffCardScene
+        //};
 
-        deckManager.InitDeck(allCards);
+        //deckManager.InitDeck(allCards);
+
+        var gm = GetNode<GameManager>("/root/GameManager");
+
+        GD.Print($"PlayerRef ready: {gm.PlayerRef}");
+        var playerData = gm.PlayerRef;
+
+        GD.Print($"Initializing combat with cards: {playerData.AvailableCards}");
+
+        deckManager.InitDeck(playerData.AvailableCards);
+
         StartPlayerTurn();
 
     }
