@@ -13,7 +13,7 @@ public partial class DeckManager : Node
     private List<PackedScene> discardPile = new();
     private Random rng = new();
 
-    public void InitDeck(List<PackedScene> availableCards, int copiesPerCard = 3)
+    public void InitDeck(List<PackedScene> availableCards, int copiesPerCard)
     {
         allCardTypes = availableCards;
         BuildAndShuffleDeck(copiesPerCard);

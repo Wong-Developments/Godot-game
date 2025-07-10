@@ -23,7 +23,17 @@ public partial class Character : Entity
 
         AddToGroup("player");
 		stateMachine.ChangeState(stateMachine.GetNode<State>("FreeRoam"));
-	}
+
+        // Add this temporary debug to your player's _Ready()
+        GD.Print($"Player collision shapes:");
+        foreach (Node child in GetChildren())
+        {
+            if (child is CollisionShape2D || child is CollisionPolygon2D)
+            {
+                GD.Print($"- {child.Name} (Visible: {((Node2D)child).Visible})");
+            }
+        }
+    }
 
 	public override void _Process(double delta)
 	{

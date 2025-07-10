@@ -2,6 +2,7 @@ using Godot;
 using System;
 
 using Game.Scripts.Overworld.Player;
+using Game.Scripts.Core;
 
 namespace Game.Scripts.Overworld;
 
@@ -13,7 +14,10 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
-        currentScene = GetNode("Control"); // Overworld scene (assigned at start)
+        //DebugUtils.ShowNavigation(true);
+        DebugUtils.ShowCollisions(true);
+
+        currentScene = GetNode("OverworldManager"); // Overworld scene (assigned at start)
     }
 
 
@@ -33,7 +37,7 @@ public partial class GameManager : Node
     {
         currentScene?.QueueFree();
 
-        var overworldScene = GD.Load<PackedScene>("res://scenes/core/overworld_scene.tscn"); // adjust path
+        var overworldScene = GD.Load<PackedScene>("res://scenes/core/overworld_manager.tscn"); // adjust path
         currentScene = overworldScene.Instantiate();
         AddChild(currentScene);
     }

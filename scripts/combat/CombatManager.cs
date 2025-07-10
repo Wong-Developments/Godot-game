@@ -25,6 +25,7 @@ public partial class CombatManager : Node
     [Export] private DeckManager deckManager;
 
     [Export] private int handDrawSize = 3;
+    [Export] private int copiesPerCard = 2; // How many copies of each card to include in the deck
 
     [Export] private PackedScene damageCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/damageCard.tscn");
     [Export] private PackedScene healCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/healCard.tscn");
@@ -77,7 +78,7 @@ public partial class CombatManager : Node
 
         GD.Print($"Initializing combat with cards: {playerData.AvailableCards}");
 
-        deckManager.InitDeck(playerData.AvailableCards);
+        deckManager.InitDeck(playerData.AvailableCards, copiesPerCard);
 
         StartPlayerTurn();
 
@@ -278,7 +279,8 @@ public partial class CombatManager : Node
         endTurnButton.Disabled = true;
         handUIManager.ClearHand();
         deckManager.Reset();
-        GetTree().ChangeSceneToFile("res://scenes/core/game_manager.tscn");
+        var gm = GetNode<GameManager>("/root/GameManager");
+        gm.SwitchToOverworld();
         // TODO: handle victory
     }
 
@@ -289,7 +291,8 @@ public partial class CombatManager : Node
         endTurnButton.Disabled = true;
         handUIManager.ClearHand();
         deckManager.Reset();
-        GetTree().ChangeSceneToFile("res://scenes/core/game_manager.tscn");
+        var gm = GetNode<GameManager>("/root/GameManager");
+        gm.SwitchToOverworld();
         // TODO: handle game-over
     }
 }
