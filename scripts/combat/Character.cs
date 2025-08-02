@@ -17,6 +17,8 @@ public abstract partial class Character : Node2D
 
     public List<StatusEffect> ActiveEffects { get; private set; } = new();
 
+    public List<float> DamageMultipliers { get; } = new List<float>();
+
     public override void _Ready()
     {
         Health = maxHealth;
@@ -85,6 +87,17 @@ public abstract partial class Character : Node2D
             if (ActiveEffects[i].Duration <= 0)
                 ActiveEffects.RemoveAt(i);
         }
+    }
+
+    public float GetTotalDamageMultiplier()
+    {
+        if (DamageMultipliers.Count == 0) return 1.0f;
+        float total = 1.0f;
+        foreach (var multiplier in DamageMultipliers)
+        {
+            total *= multiplier;
+        }
+        return total;
     }
 
 }

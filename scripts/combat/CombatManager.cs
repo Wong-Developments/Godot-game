@@ -38,6 +38,11 @@ public partial class CombatManager : Node
 
     public static CombatManager Instance { get; private set; }
 
+    public List<Enemy> GetAliveEnemies()
+    {
+        return enemies.Where(e => e.IsAlive()).ToList();
+    }
+
     public override void _Ready()
     {
         Instance = this;
@@ -180,6 +185,7 @@ public partial class CombatManager : Node
 
     private bool HandleCardDropped(Card card)
     {
+        bool isValidTarget = false;
         Character target = null;
 
         // Check if mouse is over player's drop area
@@ -187,28 +193,40 @@ public partial class CombatManager : Node
         bool isOnPlayer = IsMouseOverReceiver(playerReceiver);
 
         // Check if mouse is over an enemy's drop area
-        var hitEnemy = enemies.FirstOrDefault(e =>
-        {
-            var enemyReceiver = e.GetNodeOrNull<TargetReceiver>("DropArea");
-            return IsMouseOverReceiver(enemyReceiver);
-        });
+        //var hitEnemy = enemies.FirstOrDefault(e =>
+        //{
+        //    var enemyReceiver = e.GetNodeOrNull<TargetReceiver>("DropArea");
+        //    return IsMouseOverReceiver(enemyReceiver);
+        //});
 
-        // Match the card's target type
+        // Check if mouse is over an enemy's drop area
+        var hitEnemy = enemies.FirstOrDefault(e => 
+            e.IsAlive() && 
+            IsMouseOverReceiver(e.GetNodeOrNull<TargetReceiver>("DropArea")));
+
         switch (card.Type)
         {
             case TargetType.Self:
-                if (isOnPlayer)
-                    target = player;
+                isValidTarget = isOnPlayer;
+                target = player;
                 break;
 
             case TargetType.SingleEnemy:
-                if (hitEnemy != null)
-                    target = hitEnemy;
+                isValidTarget = hitEnemy != null;
+                target = hitEnemy;
                 break;
 
             case TargetType.AllEnemies:
-                target = null;
+                // Must be dropped on an enemy (not player) but hits all
+                isValidTarget = hitEnemy != null;
+                target = null; // Explicitly null for AOE
                 break;
+        }
+
+        if (!isValidTarget)
+        {
+            card.RejectPlay();
+            return false;
         }
 
         if (card.Type != TargetType.AllEnemies && target == null)

@@ -14,9 +14,10 @@ public partial class DamageCard : Card
     {
         if (target is Enemy enemy)
         {
-            int dmg = 30;
-            enemy.TakeDamage(dmg);
-            Logger.Info($"Played Strike: {dmg} damage dealt");
+            int baseDamage = 30;
+            int finalDamage = (int)(baseDamage * source.GetTotalDamageMultiplier());
+            enemy.TakeDamage(finalDamage);
+            Logger.Info($"Played Strike: {finalDamage} damage dealt (Base: {baseDamage}, Multiplier: {source.GetTotalDamageMultiplier():F1}x)");
         }
         else
             Logger.Warning("Strike used on invalid target.");

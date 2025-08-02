@@ -18,15 +18,21 @@ public partial class DamageBuffEffect : StatusEffect
 
     protected override void OnApply()
     {
-        target.BaseDamage = (int)(target.BaseDamage * multiplier);
-        Logger.Info($"{target.Name}'s damage increased by {multiplier}x for {Duration} turns.");
+        //target.BaseDamage = (int)(target.BaseDamage * multiplier);
+        //Logger.Info($"{target.Name}'s damage increased by {multiplier}x for {Duration} turns.");
+
+        target.DamageMultipliers.Add(multiplier);
+        Logger.Info($"{target.Name}'s damage will be multiplied by {multiplier}x for {Duration} turns.");
     }
 
     protected override void OnTick() { } // No per-turn tick needed for this one
 
     protected override void OnExpire()
     {
-        target.BaseDamage = (int)(target.BaseDamage / multiplier);
+        //target.BaseDamage = (int)(target.BaseDamage / multiplier);
+        //Logger.Info($"{target.Name}'s damage buff expired.");
+
+        target.DamageMultipliers.Remove(multiplier);
         Logger.Info($"{target.Name}'s damage buff expired.");
     }
 }

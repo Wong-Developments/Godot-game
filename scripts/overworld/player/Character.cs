@@ -13,7 +13,8 @@ public partial class Character : Entity
         GD.Load<PackedScene>("res://Scenes/Combat/Cards/HealCard.tscn"),
         GD.Load<PackedScene>("res://Scenes/Combat/Cards/SheildCard.tscn"),
         GD.Load<PackedScene>("res://Scenes/Combat/Cards/BurnCard.tscn"),
-        GD.Load<PackedScene>("res://Scenes/Combat/Cards/BuffCard.tscn")
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/BuffCard.tscn"),
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/DmgAllCard.tscn")
     };
 
     public override void _Ready()
