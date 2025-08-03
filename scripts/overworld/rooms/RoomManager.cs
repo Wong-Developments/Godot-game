@@ -76,7 +76,6 @@ public partial class RoomManager : Node2D
         }
 
         isTransitioning = true;
-
         currentRoomInstance.SetDoorTriggersEnabled(false); // ✅ block future triggers
 
         int newRow = currentRow;
@@ -94,16 +93,19 @@ public partial class RoomManager : Node2D
         {
             GD.Print("Blocked: No room in that direction.");
             isTransitioning = false;
+            currentRoomInstance.SetDoorTriggersEnabled(true); // re-enable triggers
             return;
         }
 
         string opposite = GetOppositeDirection(direction);
 
+        // ✅ Only update current room coordinates after validation
         currentRow = newRow;
         currentCol = newCol;
 
         LoadRoomAt(currentRow, currentCol, opposite);
     }
+
 
 
     private async void SetPlayerSpawn(string cameFromDirection)
