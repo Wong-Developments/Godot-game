@@ -82,10 +82,7 @@ public abstract partial class Card : Button
 
         // Drop failed — return card to hand
         RejectPlay();
-
         ReleaseFocus();
-        //Input.SetMouseMode(Input.MouseMode.Visible); // Just in case
-        //Input.SetMouseMode(Input.MouseModeEnum.Visible);
     }
 
 

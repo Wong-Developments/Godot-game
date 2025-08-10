@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://le824y486sqf"]
+[gd_scene load_steps=8 format=3 uid="uid://le824y486sqf"]
 
 [ext_resource type="Script" uid="uid://wptibbq1ai30" path="res://scripts/combat/CombatManager.cs" id="1_mtj8m"]
 [ext_resource type="Texture2D" uid="uid://dk3umcnj3srvp" path="res://assets/backgrounds/bg.png" id="2_b521f"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://ime4ecl7srgk" path="res://scripts/combat/HandUIManager.cs" id="4_b521f"]
 [ext_resource type="PackedScene" uid="uid://bf206421p4rb4" path="res://scenes/combat/enemy.tscn" id="5_tkdkq"]
 [ext_resource type="Script" uid="uid://dj4t7aqei31lb" path="res://scripts/combat/DeckManager.cs" id="6_b521f"]
+[ext_resource type="Script" uid="uid://dp2xnjqi71ov7" path="res://scripts/combat/TurnManager.cs" id="7_tkdkq"]
 
-[node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemyContainer", "playerHPLabel", "enemyHPLabel", "endTurnButton", "handUIManager", "deckManager")]
+[node name="CombatManager" type="Node" node_paths=PackedStringArray("player", "enemyContainer", "playerHPLabel", "enemyHPLabel", "endTurnButton", "handUIManager", "deckManager", "turnManager")]
 script = ExtResource("1_mtj8m")
 player = NodePath("CombatScene/Player")
 enemyContainer = NodePath("CombatScene/EnemyContainer")
@@ -16,6 +17,7 @@ enemyHPLabel = NodePath("CombatScene/UI/EnemyHealthLabel")
 endTurnButton = NodePath("CombatScene/UI/EndTurnButton")
 handUIManager = NodePath("CombatScene/UI/HandUIManager")
 deckManager = NodePath("CombatScene/DeckManager")
+turnManager = NodePath("CombatScene/TurnManager")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(572, 322)
@@ -76,3 +78,6 @@ offset_bottom = 79.0
 
 [node name="DeckManager" type="Node" parent="CombatScene"]
 script = ExtResource("6_b521f")
+
+[node name="TurnManager" type="Node" parent="CombatScene"]
+script = ExtResource("7_tkdkq")
