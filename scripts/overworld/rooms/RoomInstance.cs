@@ -6,9 +6,7 @@ public partial class RoomInstance : Node2D
 {
     [Signal]
     public delegate void DoorEnteredEventHandler(string direction);
-
     private bool doorsEnabled = false;
-
     public override void _Ready()
     {
         ConnectDoor("NorthDoor", "north");
@@ -17,6 +15,9 @@ public partial class RoomInstance : Node2D
         ConnectDoor("WestDoor", "west");
     }
 
+    /*
+        Connects each door to the trigger nodes on the scene
+     */
     private void ConnectDoor(string nodeName, string direction)
     {
         var door = GetNodeOrNull<Node2D>(nodeName);
@@ -35,11 +36,12 @@ public partial class RoomInstance : Node2D
             }
         };
     }
-
+    
     public void SetDoorTriggersEnabled(bool enabled)
     {
         doorsEnabled = enabled;
     }
+
 
     public async Task EnableDoorsAfterDelay(float seconds)
     {
