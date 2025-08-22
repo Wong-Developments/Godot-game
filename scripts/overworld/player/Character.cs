@@ -9,12 +9,16 @@ public partial class Character : Entity
 {
     public List<PackedScene> AvailableCards { get; private set; } = new()
     {
-        GD.Load<PackedScene>("res://Scenes/Combat/Cards/DamageCard.tscn"),
-        GD.Load<PackedScene>("res://Scenes/Combat/Cards/HealCard.tscn"),
         GD.Load<PackedScene>("res://Scenes/Combat/Cards/SheildCard.tscn"),
-        GD.Load<PackedScene>("res://Scenes/Combat/Cards/BurnCard.tscn"),
         GD.Load<PackedScene>("res://Scenes/Combat/Cards/BuffCard.tscn"),
-        GD.Load<PackedScene>("res://Scenes/Combat/Cards/DmgAllCard.tscn")
+
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/bashCard.tscn"),
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/croixCard.tscn"),
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/enflameCard.tscn"),
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/saltBlastCard.tscn"),
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/doubleSwingCard.tscn"),
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/hammerSpinCard.tscn"),
+        GD.Load<PackedScene>("res://Scenes/Combat/Cards/counterSmashCard.tscn"),
     };
 
     public override void _Ready()

@@ -14,6 +14,8 @@ public abstract partial class Character : Node2D
     public int Shield { get; protected set; } = 0;
     public int BaseDamage { get; set; } = 10;
 
+    public int LastDamageTaken { get; private set; } = 0;
+
 
     public List<StatusEffect> ActiveEffects { get; private set; } = new();
 
@@ -35,6 +37,8 @@ public abstract partial class Character : Node2D
 
     public virtual void TakeDamage(int amount)
     {
+        LastDamageTaken = amount; // Store the most recent hit
+
         int damageLeft = amount;
 
         if (Shield > 0)

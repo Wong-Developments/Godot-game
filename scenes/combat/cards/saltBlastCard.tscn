@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsqys6qa2tuvh"]
+
+[ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="1_lvx0h"]
+[ext_resource type="Script" uid="uid://bwi3utadgg5pb" path="res://scripts/combat/cards/SaltBlastCard.cs" id="2_xusxy"]
+
+[node name="SaltBlastCard" type="Button"]
+icon = ExtResource("1_lvx0h")
+icon_alignment = 1
+script = ExtResource("2_xusxy")

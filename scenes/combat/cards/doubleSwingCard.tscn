@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckv2rnueupr5d"]
+
+[ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="1_cf6gq"]
+[ext_resource type="Script" uid="uid://cvqocf4lm8p34" path="res://scripts/combat/cards/DoubleSwingCard.cs" id="2_ve3wp"]
+
+[node name="DoubleSwing" type="Button"]
+icon = ExtResource("1_cf6gq")
+autowrap_mode = 3
+icon_alignment = 1
+script = ExtResource("2_ve3wp")

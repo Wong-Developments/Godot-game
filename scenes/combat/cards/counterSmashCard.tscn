@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn72ey13x2ffc"]
+
+[ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="1_1u0ie"]
+[ext_resource type="Script" uid="uid://b41g36mnab8qh" path="res://scripts/combat/cards/CounterSmashCard.cs" id="2_8d1lc"]
+
+[node name="CounterSmashCard" type="Button"]
+icon = ExtResource("1_1u0ie")
+autowrap_mode = 3
+icon_alignment = 1
+script = ExtResource("2_8d1lc")

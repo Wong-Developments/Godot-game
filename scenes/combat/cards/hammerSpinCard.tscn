@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ifefvbnqjv6g"]
+
+[ext_resource type="Texture2D" uid="uid://3eyq1assfasa" path="res://assets/cards/CardDraft.png" id="1_4lohp"]
+[ext_resource type="Script" uid="uid://dsck8gsro78go" path="res://scripts/combat/cards/HammerSpinCard.cs" id="2_uxq30"]
+
+[node name="HammerSpinCard" type="Button"]
+icon = ExtResource("1_4lohp")
+autowrap_mode = 3
+icon_alignment = 1
+script = ExtResource("2_uxq30")
