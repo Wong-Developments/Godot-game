@@ -22,6 +22,7 @@ public partial class RoomManager : Node2D
     {
         InitializeGrid();
         LoadRoomAt(currentRow, currentCol, ""); // no spawn direction at start
+        
     }
 
     /*

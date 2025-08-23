@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://scripts/core/Globals.cs"
+music_player="*res://scenes/audio/music_player.tscn"
 
 [dotnet]
 

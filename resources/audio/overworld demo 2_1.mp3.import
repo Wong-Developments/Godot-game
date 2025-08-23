@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d1x4epp6oyhuu"
+path="res://.godot/imported/overworld demo 2_1.mp3-b5cb9bdc0ae10e732f44d7fc747bc113.mp3str"
+
+[deps]
+
+source_file="res://resources/audio/overworld demo 2_1.mp3"
+dest_files=["res://.godot/imported/overworld demo 2_1.mp3-b5cb9bdc0ae10e732f44d7fc747bc113.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

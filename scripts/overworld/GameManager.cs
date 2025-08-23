@@ -18,6 +18,10 @@ public partial class GameManager : Node
         DebugUtils.ShowCollisions(true);
 
         currentScene = GetNode("OverworldManager"); // Overworld scene (assigned at start)
+
+        var musicPlayer = GetNode<AudioPlayer>("/root/music_player");
+
+        musicPlayer.PlayOverWorldTheme();
     }
 
 
