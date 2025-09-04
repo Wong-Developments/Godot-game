@@ -13,15 +13,15 @@ public partial class Character : Entity
     public override void _Ready()
 	{
         //Starting hand, when game first loads
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Bash"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Croix"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Sheild"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Enflame"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Buff"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Salt Blast"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Double Swing"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Hammer Spin"), 0);
-        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Counter Smash"), 0);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Bash"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Croix"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Sheild"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Enflame"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Buff"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Salt Blast"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Double Swing"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Hammer Spin"), 1);
+        Deck.AddCard(CardDatabase.AllCards.Find(c => c.Name == "Counter Smash"), 1);
 
         var gm = GetNode<GameManager>("/root/GameManager");
         gm.PlayerRef = this; // Set the global player reference
