@@ -13,15 +13,12 @@ public abstract partial class Card : Button
     public Player SourcePlayer { get; set; } // Set when drawn
 
     private Vector2 originalPosition;
-    //private bool isDragging = false;
 
     public override void _Ready()
     {
-        //originalPosition = Position;
         SetTextLabel();
     }
 
-    //public abstract void Play(Player player, Enemy enemy);
     public abstract void Play(Character source, Character target);
 
 

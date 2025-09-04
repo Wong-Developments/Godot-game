@@ -5,8 +5,11 @@ using Godot;
 namespace Game.Scripts.Combat.Cards;
 public partial class CounterSmashCard : Card
 {
+    [Export] public string CardNameExport = "Counter Smash";
+    [Export] public string DescriptionExport = "desc";
+    //[Export] public Texture2D IconExport; // May be needed later for overworld UI
     public override TargetType Type => TargetType.SingleEnemy;
-    public override string CardName => "Counter Smash";
+    public override string CardName => CardNameExport;
 
     public override void Play(Character source, Character target)
     {

@@ -1,11 +1,12 @@
 using Game.Scripts.Combat.Cards;
 using Game.Scripts.Combat.Effects;
 using Game.Scripts.Core;
+using Game.Scripts.Data;
+using Game.Scripts.Overworld;
 using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Scripts.Overworld;
 
 namespace Game.Scripts.Combat;
 
@@ -28,16 +29,7 @@ public partial class CombatManager : Node
     private TargetingService targetingService;
 
     [Export] private int handDrawSize = 3;
-    [Export] private int copiesPerCard = 2; // How many copies of each card to include in the deck
-
-    //[Export] private PackedScene damageCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/damageCard.tscn");
-    //[Export] private PackedScene healCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/healCard.tscn");
-    //[Export] private PackedScene sheildCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/sheildCard.tscn");
-    //[Export] private PackedScene burnCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/burnCard.tscn");
-    //[Export] private PackedScene buffCardScene = GD.Load<PackedScene>("res://scenes/combat/cards/buffCard.tscn");
-
-
-
+    
     public static CombatManager Instance { get; private set; }
 
     public List<Enemy> GetAliveEnemies()
@@ -91,9 +83,19 @@ public partial class CombatManager : Node
         GD.Print($"PlayerRef ready: {gm.PlayerRef}");
         var playerData = gm.PlayerRef;
 
-        GD.Print($"Initializing combat with cards: {playerData.AvailableCards}");
+        //GD.Print($"Initializing combat with cards: {playerData.AvailableCards}");
 
-        deckManager.InitDeck(playerData.AvailableCards, copiesPerCard);
+        //deckManager.InitDeck(playerData.AvailableCards, copiesPerCard);
+
+        // Build deck list from CardInventory
+        var deckList = new List<CardData>();
+        foreach (var kvp in playerData.Deck.Cards)
+            for (int i = 0; i < kvp.Value; i++)
+                deckList.Add(kvp.Key);
+
+        GD.Print($"Initializing combat with cards: {string.Join(", ", deckList.Select(c => c.Name))}");
+
+        deckManager.InitDeck(deckList);
 
         //StartPlayerTurn();
         turnManager.StartPlayerTurn();
@@ -102,10 +104,14 @@ public partial class CombatManager : Node
 
     public void OnCardPlayed(Card card)
     {
-        deckManager.Discard(card.SourceScene);
-        handUIManager.RemoveCard(card); // ✅ Properly clears from UI
-        UpdateHPLabels(); // Optional: reflect new damage/heal
+        // Find the CardData for this card (by name)
+        var cardData = CardDatabase.AllCards.Find(c => c.Name == card.CardName);
 
+        //deckManager.Discard(card.SourceScene);
+        deckManager.Discard(cardData);
+        handUIManager.RemoveCard(card); // ✅ Properly clears from UI
+
+        UpdateHPLabels(); // Optional: reflect new damage/heal
         CheckBattleOutcome();
     }
 

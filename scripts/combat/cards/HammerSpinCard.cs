@@ -6,8 +6,12 @@ using System;
 namespace Game.Scripts.Combat.Cards;
 public partial class HammerSpinCard : Card
 {
+    [Export] public string CardNameExport = "Hammer Spin";
+    [Export] public string DescriptionExport = "desc";
+    //[Export] public Texture2D IconExport; // May be needed later for overworld UI
+
     public override TargetType Type => TargetType.AllEnemies;
-    public override string CardName => "Hammer Spin";
+    public override string CardName => CardNameExport;
 
     public override void Play(Character source, Character target)
     {

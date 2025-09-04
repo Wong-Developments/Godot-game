@@ -7,8 +7,12 @@ using System.Linq;
 namespace Game.Scripts.Combat.Cards;
 public partial class DoubleSwingCard : Card
 {
+    [Export] public string CardNameExport = "Double Swing";
+    [Export] public string DescriptionExport = "desc";
+    //[Export] public Texture2D IconExport; // May be needed later for overworld UI
+
     public override TargetType Type => TargetType.SingleEnemy;
-    public override string CardName => "Double Swing";
+    public override string CardName => CardNameExport;
 
     public override void Play(Character source, Character target)
     {

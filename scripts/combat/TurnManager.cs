@@ -1,6 +1,7 @@
 using Game.Scripts.Combat.Cards;
 using Game.Scripts.Combat.Effects;
 using Game.Scripts.Core;
+using Game.Scripts.Data;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -45,11 +46,10 @@ public partial class TurnManager : Node
 
         for (int i = 0; i < handDrawSize; i++)
         {
-            var cardScene = deckManager.Draw();
-            if (cardScene != null)
+            var cardData = deckManager.Draw();
+            if (cardData != null)
             {
-                var card = cardScene.Instantiate<Card>();
-                card.SourceScene = cardScene;
+                var card = cardData.Scene.Instantiate<Card>();
                 card.SourcePlayer = player;
                 card.SetTextLabel();
                 handUIManager.AddCard(card);
@@ -71,7 +71,11 @@ public partial class TurnManager : Node
         foreach (var node in handUIManager.GetCards())
         {
             if (node is Card card)
-                deckManager.Discard(card.SourceScene);
+            {
+                var cardData = CardDatabase.AllCards.Find(c => c.Name == card.CardName);
+                deckManager.Discard(cardData);
+            }
+                
         }
 
         handUIManager.ClearHand();

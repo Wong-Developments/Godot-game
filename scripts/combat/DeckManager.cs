@@ -1,6 +1,7 @@
 using Game.Scripts.Combat.Cards;
 using Game.Scripts.Combat.Effects;
 using Game.Scripts.Core;
+using Game.Scripts.Data;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -8,23 +9,20 @@ using System.Collections.Generic;
 namespace Game.Scripts.Combat;
 public partial class DeckManager : Node
 {
-    private List<PackedScene> allCardTypes = new();
-    private Queue<PackedScene> deck = new();
-    private List<PackedScene> discardPile = new();
+    private List<CardData> allCardTypes = new();
+    private Queue<CardData> deck = new();
+    private List<CardData> discardPile = new();
     private Random rng = new();
 
-    public void InitDeck(List<PackedScene> availableCards, int copiesPerCard)
+    public void InitDeck(List<CardData> availableCards)
     {
         allCardTypes = availableCards;
-        BuildAndShuffleDeck(copiesPerCard);
+        BuildAndShuffleDeck();
     }
 
-    private void BuildAndShuffleDeck(int copies)
+    private void BuildAndShuffleDeck()
     {
-        var cardPool = new List<PackedScene>();
-
-        for (int i = 0; i < copies; i++)
-            cardPool.AddRange(allCardTypes);
+        var cardPool = new List<CardData>(allCardTypes);
 
         while (cardPool.Count > 0)
         {
@@ -36,7 +34,7 @@ public partial class DeckManager : Node
         Logger.Debug($"Deck initialized with {deck.Count} cards.");
     }
 
-    public PackedScene Draw()
+    public CardData Draw()
     {
         Logger.Debug($"Drawing card from deck. Current deck size: {deck.Count}, discard pile size: {discardPile.Count}");
         if (deck.Count == 0)
@@ -58,7 +56,7 @@ public partial class DeckManager : Node
 
 
 
-    public void Discard(PackedScene card)
+    public void Discard(CardData card)
     {
 
         discardPile.Add(card);
@@ -67,7 +65,7 @@ public partial class DeckManager : Node
 
     private void ReshuffleDiscardPile()
     {
-        var shuffled = new List<PackedScene>(discardPile);
+        var shuffled = new List<CardData>(discardPile);
         discardPile.Clear();
         Logger.Debug($"Reshuffling {shuffled.Count} cards from discard pile back into deck. discardPile cleared");
 
@@ -87,7 +85,6 @@ public partial class DeckManager : Node
     {
         deck.Clear();
         discardPile.Clear();
-        //allCardTypes.Clear();
-        BuildAndShuffleDeck(3);
+        BuildAndShuffleDeck();
     }
 }

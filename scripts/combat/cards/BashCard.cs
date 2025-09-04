@@ -6,9 +6,14 @@ using System;
 namespace Game.Scripts.Combat.Cards;
 public partial class BashCard : Card
 {
+
+    [Export] public string CardNameExport = "Bash";
+    [Export] public string DescriptionExport = "Deal heavy damage to a single enemy.";
+    //[Export] public Texture2D IconExport; // May be needed later for overworld UI
+
     public override TargetType Type => TargetType.SingleEnemy;
 
-    public override string CardName => "Bash";
+    public override string CardName => CardNameExport;
 
     public override void Play(Character source, Character target)
     {

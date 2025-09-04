@@ -6,9 +6,13 @@ using System;
 namespace Game.Scripts.Combat.Cards;
 public partial class SaltBlastCard : Card
 {
+    [Export] public string CardNameExport = "Salt Blast";
+    [Export] public string DescriptionExport = "desc";
+    //[Export] public Texture2D IconExport; // May be needed later for overworld UI
+
     public override TargetType Type => TargetType.AllEnemies;
 
-    public override string CardName => "Salt Blast";
+    public override string CardName => CardNameExport;
 
     public override void Play(Character source, Character target)
     {

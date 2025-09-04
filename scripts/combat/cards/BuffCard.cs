@@ -5,9 +5,12 @@ using Godot;
 namespace Game.Scripts.Combat.Cards;
 public partial class BuffCard : Card
 {
+    [Export] public string CardNameExport = "Buff";
+    [Export] public string DescriptionExport = "Buff attack for 2 rounds by x1.5";
+    //[Export] public Texture2D IconExport; // May be needed later for overworld UI
     public override TargetType Type => TargetType.Self;
 
-    public override string CardName => "Buff";
+    public override string CardName => CardNameExport;
 
     public override void Play(Character source, Character target)
     {
