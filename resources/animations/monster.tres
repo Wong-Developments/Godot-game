@@ -1,22 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://c5aod432pwnee"]
+[gd_resource type="SpriteFrames" load_steps=18 format=3 uid="uid://c5aod432pwnee"]
 
 [ext_resource type="Texture2D" uid="uid://cb0ibf88sh1vt" path="res://assets/character/DirtySprite.png" id="1_ov8xv"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fulqv"]
-atlas = ExtResource("1_ov8xv")
-region = Rect2(0, 160, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f2e6v"]
-atlas = ExtResource("1_ov8xv")
-region = Rect2(0, 96, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_21x0f"]
-atlas = ExtResource("1_ov8xv")
-region = Rect2(64, 32, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jgk6k"]
-atlas = ExtResource("1_ov8xv")
-region = Rect2(0, 192, 64, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3k4es"]
 atlas = ExtResource("1_ov8xv")
@@ -84,38 +68,6 @@ region = Rect2(0, 192, 64, 32)
 
 [resource]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fulqv")
-}],
-"loop": true,
-"name": &"idle_down",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f2e6v")
-}],
-"loop": true,
-"name": &"idle_left",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_21x0f")
-}],
-"loop": true,
-"name": &"idle_right",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jgk6k")
-}],
-"loop": true,
-"name": &"idle_up",
-"speed": 4.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3k4es")

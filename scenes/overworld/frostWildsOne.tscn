@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://cea18388pitb6"]
+[gd_scene load_steps=6 format=4 uid="uid://cea18388pitb6"]
 
 [ext_resource type="Script" uid="uid://4q2rfyt13yfy" path="res://scripts/overworld/rooms/RoomInstance.cs" id="1_23w6j"]
 [ext_resource type="TileSet" uid="uid://c86fwq28q286f" path="res://resources/tilesets/FrostTiles.tres" id="2_i5yu6"]
 [ext_resource type="PackedScene" uid="uid://cjvma3ooyes4m" path="res://scenes/characters/monster.tscn" id="3_i5yu6"]
+[ext_resource type="PackedScene" uid="uid://vxj4f4vcw2y6" path="res://scenes/characters/Oppa.tscn" id="4_20vtf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_23w6j"]
 radius = 24.0208
@@ -77,3 +78,6 @@ shape = SubResource("CircleShape2D_23w6j")
 
 [node name="Monster" parent="." instance=ExtResource("3_i5yu6")]
 position = Vector2(223, 195)
+
+[node name="Oppa" parent="." instance=ExtResource("4_20vtf")]
+position = Vector2(336, 221)

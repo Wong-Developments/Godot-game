@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://vxj4f4vcw2y6"]
+
+[ext_resource type="Script" uid="uid://mnl0irml476l" path="res://scripts/overworld/enemies/Monster/Monster.cs" id="1_jnx5k"]
+[ext_resource type="Texture2D" uid="uid://47qj45olrcwe" path="res://assets/enemy/Oppa.png" id="2_jnx5k"]
+[ext_resource type="Script" uid="uid://ht3arujdlaja" path="res://scripts/overworld/enemies/Monster/MonsterAnimation.cs" id="3_2mvpl"]
+[ext_resource type="Script" uid="uid://lwgwf0busndq" path="res://scripts/overworld/states/StateMachine.cs" id="4_logvg"]
+[ext_resource type="Script" uid="uid://cehxgqsd2al34" path="res://scripts/overworld/enemies/Monster/FreeRoam.cs" id="5_c2hp6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fulqv"]
+size = Vector2(16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wgdp2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jnx5k")
+}],
+"loop": true,
+"name": &"CHANGE",
+"speed": 5.0
+}]
+
+[node name="Oppa" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine")]
+position = Vector2(32, 16)
+script = ExtResource("1_jnx5k")
+stateMachine = NodePath("StateMachine")
+speed = 110.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+z_index = 5
+shape = SubResource("RectangleShape2D_fulqv")
+
+[node name="MonsterAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state")]
+texture_filter = 1
+scale = Vector2(0.222222, 0.222222)
+sprite_frames = SubResource("SpriteFrames_wgdp2")
+animation = &"CHANGE"
+script = ExtResource("3_2mvpl")
+state = NodePath("../StateMachine/FreeRoam")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner", "currentState")]
+script = ExtResource("4_logvg")
+owner = NodePath("..")
+currentState = NodePath("FreeRoam")
+
+[node name="FreeRoam" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine")]
+script = ExtResource("5_c2hp6")
+stateMachine = NodePath("..")

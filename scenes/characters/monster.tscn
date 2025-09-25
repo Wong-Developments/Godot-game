@@ -22,7 +22,7 @@ shape = SubResource("RectangleShape2D_fulqv")
 [node name="MonsterAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("state")]
 texture_filter = 1
 sprite_frames = ExtResource("2_emo4d")
-animation = &"idle_up"
+animation = &"walk_down"
 script = ExtResource("3_emo4d")
 state = NodePath("../StateMachine/FreeRoam")
 
