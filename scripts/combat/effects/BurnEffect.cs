@@ -6,10 +6,14 @@ using System;
 namespace Game.Scripts.Combat.Effects;
 public partial class BurnEffect : StatusEffect
 {
-    public BurnEffect(int duration)
+    private int burnDamage;
+
+    public BurnEffect(int duration, int burnDamage = 5)
     {
         Duration = duration;
         Name = "Burn";
+        this.burnDamage = burnDamage;
+
     }
 
     protected override void OnApply()
@@ -19,7 +23,6 @@ public partial class BurnEffect : StatusEffect
 
     protected override void OnTick()
     {
-        int burnDamage = 5;
         target.TakeDamage(burnDamage);
         Logger.Debug($"{target.Name} takes {burnDamage} burn damage. {Duration - 1} turns left.");
     }

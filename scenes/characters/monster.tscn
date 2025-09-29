@@ -12,6 +12,7 @@ size = Vector2(48, 24)
 [node name="Monster" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine")]
 position = Vector2(32, 16)
 script = ExtResource("1_jl15v")
+EnemyTypeName = "Monster"
 stateMachine = NodePath("StateMachine")
 speed = 110.0
 

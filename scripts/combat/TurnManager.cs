@@ -94,8 +94,9 @@ public partial class TurnManager : Node
             if (enemy.IsAlive())
             {
                 enemy.ProcessEffects();
-                int damage = enemy.Attack();
-                player.TakeDamage(damage);
+                //int damage = enemy.Attack();
+                //player.TakeDamage(damage);
+                enemy.Attack(); // Enemy.Attack() already applies damage
             }
         }
 

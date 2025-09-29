@@ -32,6 +32,8 @@ public partial class CombatManager : Node
     
     public static CombatManager Instance { get; private set; }
 
+    public Player Player => player;
+
     public List<Enemy> GetAliveEnemies()
     {
         return enemies.Where(e => e.IsAlive()).ToList();
@@ -41,13 +43,22 @@ public partial class CombatManager : Node
     {
         Instance = this;
 
+        var gm = GetNode<GameManager>("/root/GameManager");
+        string enemyTypeName = gm.PendingEnemyTypeName;
+
+
+        // Clear any existing enemies in the container (if needed)
         foreach (var child in enemyContainer.GetChildren())
-        {
-            if (child is Enemy enemy)
-            {
-                enemies.Add(enemy);
-            }
-        }
+            child.QueueFree();
+        enemies.Clear();
+
+        // Instantiate the correct enemy from the database
+        var enemyData = EnemyDatabase.AllEnemies[enemyTypeName];
+        var enemyScene = enemyData.CombatSprite;
+        var enemyInstance = enemyScene.Instantiate<Enemy>();
+        enemyInstance.InitializeFromData(enemyData);
+        enemyContainer.AddChild(enemyInstance);
+        enemies.Add(enemyInstance);
 
         turnManager.Initialize(player, enemies, handUIManager, deckManager, handDrawSize);
 
@@ -78,14 +89,8 @@ public partial class CombatManager : Node
 
         UpdateHPLabels();
 
-        var gm = GetNode<GameManager>("/root/GameManager");
-
         GD.Print($"PlayerRef ready: {gm.PlayerRef}");
         var playerData = gm.PlayerRef;
-
-        //GD.Print($"Initializing combat with cards: {playerData.AvailableCards}");
-
-        //deckManager.InitDeck(playerData.AvailableCards, copiesPerCard);
 
         // Build deck list from CardInventory
         var deckList = new List<CardData>();
@@ -97,7 +102,6 @@ public partial class CombatManager : Node
 
         deckManager.InitDeck(deckList);
 
-        //StartPlayerTurn();
         turnManager.StartPlayerTurn();
 
     }

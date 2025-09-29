@@ -90,9 +90,16 @@ public partial class FreeRoam : EnemyState
             var gm = GetNode<GameManager>("/root/GameManager");
             gm.PlayerRef = hitPlayer;
 
-            Logger.Debug($"PlayerRef set in GameManager: {gm.PlayerRef}");
+            // Get the enemy type name from the Monster instance
+            var monster = (Monster)stateMachine.owner;
+            string enemyTypeName = monster.EnemyTypeName;
 
-            gm.SwitchToCombat(hitPlayer); // Switch to combat scene
+            Logger.Debug($"PlayerRef set in GameManager: {gm.PlayerRef}");
+            Logger.Debug($"EnemyTypeName for combat: {enemyTypeName}");
+
+            //gm.SwitchToCombat(hitPlayer); // Switch to combat scene
+            // Call a new method to start combat with the enemy type name
+            gm.StartCombatWithEnemy(enemyTypeName);
             return;
         }
 

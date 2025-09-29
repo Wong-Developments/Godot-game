@@ -32,12 +32,12 @@ public partial class AudioPlayer : Node
 
 	public void PlayTitleTheme()
 	{
-		PlayMusic(TitleTheme);
+		PlayMusic(TitleTheme, volume: 0.5f);
 	}
 	
 	public void PlayOverWorldTheme()
 	{
-		PlayMusic(OverworldTheme);
+		PlayMusic(OverworldTheme, volume: 0.5f);
 	}
 	
 

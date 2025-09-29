@@ -9,6 +9,7 @@ namespace Game.Scripts.Overworld;
 public partial class GameManager : Node
 {
     public Character PlayerRef { get; set; }
+    public string PendingEnemyTypeName { get; set; }
 
     private Node currentScene;
 
@@ -44,6 +45,12 @@ public partial class GameManager : Node
         var overworldScene = GD.Load<PackedScene>("res://scenes/core/overworld_manager.tscn"); // adjust path
         currentScene = overworldScene.Instantiate();
         AddChild(currentScene);
+    }
+
+    public void StartCombatWithEnemy(string enemyTypeName)
+    {
+        PendingEnemyTypeName = enemyTypeName;
+        SwitchToCombat(PlayerRef);
     }
 }
 

@@ -23,6 +23,7 @@ animations = [{
 [node name="Oppa" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine")]
 position = Vector2(32, 16)
 script = ExtResource("1_jnx5k")
+EnemyTypeName = "Oppa"
 stateMachine = NodePath("StateMachine")
 speed = 110.0
 
